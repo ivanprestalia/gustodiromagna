@@ -1,0 +1,40 @@
+/**
+ * GD-B2B Admin Users Badge
+ *
+ * Badge styles for the "Richiesta B2B" column on the
+ * wp-admin Users list table.
+ *
+ * @package GD_B2B
+ * @since   2.0.0
+ */
+
+td.column-gd_b2b_req .gd-b2b-user-badge {
+	display: inline-block;
+	padding: 4px 10px;
+	border-radius: 4px;
+	font-weight: 600;
+	font-size: 11px;
+	line-height: 1.35;
+	letter-spacing: .02em;
+	text-transform: uppercase;
+	white-space: nowrap;
+}
+
+.gd-b2b-user-badge--pending {
+	background: #d97706;
+	color: #fff;
+	border: 1px solid rgba(0, 0, 0, .08);
+}
+
+.gd-b2b-user-badge--ok {
+	background: #15803d;
+	color: #fff;
+	border: 1px solid rgba(0, 0, 0, .08);
+}
+
+.gd-b2b-user-badge--na {
+	color: #787c82;
+	font-weight: 400;
+	text-transform: none;
+	font-size: 13px;
+}

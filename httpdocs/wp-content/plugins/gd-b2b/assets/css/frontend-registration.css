@@ -1,0 +1,218 @@
+/**
+ * GD-B2B Frontend Registration Form
+ *
+ * Styles for the company registration <details> block on the
+ * WooCommerce "My Account" page (guest visitors only).
+ *
+ * @package GD_B2B
+ * @since   2.0.0
+ */
+
+/* ----------------------------------------------------------------
+   Wrapper
+   ---------------------------------------------------------------- */
+
+.gd-b2b-co-reg-wrap {
+	margin-top: clamp(2rem, 4vw, 3.5rem);
+	padding-top: clamp(1.5rem, 3vw, 2.25rem);
+	border-top: 1px solid var(--wc-border-strong, rgba(0, 0, 0, .12));
+}
+
+/* ----------------------------------------------------------------
+   <details> container
+   ---------------------------------------------------------------- */
+
+.gd-b2b-co-reg {
+	border-radius: max(var(--woocommerce-form-border-radius, 4px), 2px);
+}
+
+.gd-b2b-co-reg:focus-within {
+	outline: none;
+}
+
+/* ----------------------------------------------------------------
+   <summary> – clickable header
+   ---------------------------------------------------------------- */
+
+.gd-b2b-co-reg__summary {
+	cursor: pointer;
+	list-style: none;
+	display: block;
+	margin: 0 0 clamp(.85rem, 2vw, 1.15rem);
+	padding: clamp(.72rem, 1.5vw, .95rem) clamp(1rem, 3vw, 1.35rem);
+	width: 100%;
+	box-sizing: border-box;
+	border: var(--woo-form-border-width, 2px) solid
+		var(--woocommerce-primary-color, var(--wp--preset--color--vivid-cyan-blue, currentColor));
+	border-radius: max(var(--woocommerce-form-border-radius, 4px), 2px);
+	background: transparent;
+	color: inherit;
+	font: inherit;
+	text-align: inherit;
+	line-height: 1.25;
+	-webkit-appearance: none;
+}
+
+.gd-b2b-co-reg__summary .gd-b2b-co-reg__title {
+	display: block;
+	font-size: var(--woo-font-size-medium, clamp(1.35rem, 2.6vw, 1.875rem));
+	font-weight: 700;
+	line-height: 1.2;
+	margin: 0;
+	letter-spacing: var(--woo-heading-letter-spacing, inherit);
+	text-wrap: balance;
+}
+
+.gd-b2b-co-reg__summary:hover,
+.gd-b2b-co-reg__summary:focus-visible {
+	background: color-mix(in srgb, var(--woocommerce-primary-color, currentColor) 9%, transparent);
+	outline-offset: 3px;
+}
+
+/* Inner flex layout (title + hint + chevron) */
+
+.gd-b2b-co-reg__summary-inner {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	gap: .75rem;
+	flex-wrap: wrap;
+}
+
+.gd-b2b-co-reg__chev {
+	font-size: .65em;
+	display: inline-flex;
+	transition: transform .2s ease;
+	opacity: .85;
+	line-height: 0;
+}
+
+.gd-b2b-co-reg__hint {
+	font-size: .8em;
+	font-weight: 500;
+	opacity: .88;
+	flex: 1;
+	text-align: start;
+	min-width: 8em;
+}
+
+.gd-b2b-co-reg__summary:is(:hover, :focus-visible) .gd-b2b-co-reg__hint {
+	text-decoration: underline;
+}
+
+/* ----------------------------------------------------------------
+   Open state
+   ---------------------------------------------------------------- */
+
+.gd-b2b-co-reg[open] .gd-b2b-co-reg__chev {
+	transform: rotate(-180deg);
+}
+
+.gd-b2b-co-reg summary::-webkit-details-marker {
+	display: none;
+}
+
+.gd-b2b-co-reg[open] summary.gd-b2b-co-reg__summary {
+	border-bottom-left-radius: 0;
+	border-bottom-right-radius: 0;
+	margin-bottom: .35rem;
+}
+
+/* ----------------------------------------------------------------
+   Registration form
+   ---------------------------------------------------------------- */
+
+.gd-b2b-co-reg form.register {
+	border-radius: max(var(--woocommerce-form-border-radius, 4px), 2px);
+	border: var(--woo-form-border-width, 1px) solid var(--wc-border-color, rgba(0, 0, 0, .08));
+	margin-top: .15rem;
+	padding: clamp(1rem, 2vw, 1.75rem);
+}
+
+.gd-b2b-co-reg[open] form.register {
+	border-top: none;
+	border-top-left-radius: 0;
+	border-top-right-radius: 0;
+	margin-top: -1px;
+}
+
+.gd-b2b-co-reg form.register::after {
+	content: "";
+	display: table;
+	clear: both;
+}
+
+.gd-b2b-co-reg .gd-b2b-co-reg__inner {
+	padding-top: 0;
+}
+
+.gd-b2b-co-reg form .woocommerce-form-row.form-row-last::after,
+.gd-b2b-co-reg form .woocommerce-form-row.form-row-first::after {
+	display: none;
+}
+
+/* ----------------------------------------------------------------
+   Two-column layout (≥ 540 px)
+   ---------------------------------------------------------------- */
+
+@media (min-width: 540px) {
+	.gd-b2b-co-reg form.register .form-row-first,
+	.gd-b2b-co-reg form.register .form-row-last {
+		float: left;
+		width: 48%;
+		margin-right: 4%;
+		margin-left: 0;
+		clear: none;
+		box-sizing: border-box;
+	}
+
+	.gd-b2b-co-reg form.register .form-row-last {
+		margin-right: 0;
+	}
+
+	.gd-b2b-co-reg form.register .form-row-wide {
+		float: left;
+		width: 100%;
+		clear: both;
+	}
+
+	.gd-b2b-co-reg form.register .gd-b2b-billing-country.form-row-first {
+		clear: both;
+	}
+
+	.gd-b2b-co-reg form.register .gd-b2b-billing-country .country_select,
+	.gd-b2b-co-reg form.register .gd-b2b-billing-country select {
+		width: 100%;
+		max-width: 100%;
+		box-sizing: border-box;
+	}
+}
+
+/* ----------------------------------------------------------------
+   Misc
+   ---------------------------------------------------------------- */
+
+.gd-b2b-co-reg form .woocommerce-form-row:last-of-type {
+	margin-bottom: 0;
+}
+
+.gd-b2b-co-reg .req {
+	color: var(--wc-red, #b32d2e);
+}
+
+/* Honeypot & screen-reader helpers */
+
+.gd-b2b-co-reg .gd-b2b-co-reg-hp,
+.gd-b2b-co-reg .hp,
+.screen-reader-gd-b2b,
+.gd-b2b-visually-hidden {
+	clip: rect(0 0 0 0);
+	clip-path: inset(50%);
+	height: 1px;
+	width: 1px;
+	margin: -1px;
+	overflow: hidden;
+	padding: 0;
+	border: 0;
+	position: absolute;
+}

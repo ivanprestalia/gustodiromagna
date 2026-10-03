@@ -1,0 +1,166 @@
+/**
+ * GD-B2B Frontend Account
+ *
+ * Combined styles for the WooCommerce "My Account" area:
+ *   – YOOtheme / UIkit layout fix (single-column wrapper)
+ *   – Pending-banner and active-profile panel
+ *
+ * @package GD_B2B
+ * @since   2.0.0
+ */
+
+/* =================================================================
+   Layout fix – YOOtheme / UIkit flex override
+   ================================================================= */
+
+body.woocommerce-account .uk-article [property="text"] > .woocommerce,
+body.woocommerce-account .uk-article .uk-margin-medium > .woocommerce {
+	display: block !important;
+	width: 100% !important;
+	max-width: 100% !important;
+}
+
+.gd-b2b-co-reg-wrap {
+	clear: both;
+	width: 100% !important;
+	max-width: 100% !important;
+	box-sizing: border-box;
+	flex: 0 0 100% !important;
+	min-width: 0 !important;
+}
+
+body.woocommerce-account.logged-in .woocommerce-MyAccount-wrap {
+	flex-wrap: wrap !important;
+	align-items: flex-start !important;
+}
+
+/* ----------------------------------------------------------------
+   Banner wrapper – full width above sidebar + content
+   ---------------------------------------------------------------- */
+
+.woocommerce .gd-b2b-account-banner-wrap {
+	flex: 0 0 100% !important;
+	width: 100% !important;
+	max-width: 100% !important;
+	min-width: 0 !important;
+	order: -1;
+	box-sizing: border-box;
+	grid-column: 1 / -1;
+}
+
+/* ----------------------------------------------------------------
+   Pending banner
+   ---------------------------------------------------------------- */
+
+.woocommerce-info.gd-b2b-pending-banner {
+	display: block !important;
+	position: relative !important;
+	width: 100% !important;
+	max-width: 100% !important;
+	box-sizing: border-box !important;
+	overflow: visible !important;
+}
+
+.gd-b2b-pending-banner .gd-b2b-pending-banner__title {
+	margin: 0 0 .65rem !important;
+	padding: 0 !important;
+}
+
+.gd-b2b-pending-banner .gd-b2b-pending-banner__body {
+	display: grid !important;
+	grid-template-columns: minmax(0, 1fr) auto !important;
+	gap: .75rem 1.25rem !important;
+	align-items: center !important;
+	width: 100% !important;
+	max-width: 100% !important;
+	box-sizing: border-box !important;
+	clear: both !important;
+}
+
+.gd-b2b-pending-banner .gd-b2b-pending-banner__cell--text {
+	min-width: 0 !important;
+	max-width: 100% !important;
+}
+
+.gd-b2b-pending-banner .gd-b2b-pending-banner__cell--text p {
+	margin: 0 !important;
+	float: none !important;
+	clear: none !important;
+	width: 100% !important;
+	max-width: 100% !important;
+}
+
+.gd-b2b-pending-banner .gd-b2b-pending-banner__cell--action {
+	justify-self: end !important;
+}
+
+.gd-b2b-pending-banner .gd-b2b-pending-banner__cell--action .button {
+	float: none !important;
+	position: relative !important;
+	left: auto !important;
+	right: auto !important;
+	top: auto !important;
+	transform: none !important;
+	z-index: auto !important;
+	display: inline-block !important;
+	max-width: 100% !important;
+	white-space: normal !important;
+}
+
+@media (max-width: 639px) {
+	.gd-b2b-pending-banner .gd-b2b-pending-banner__body {
+		grid-template-columns: 1fr !important;
+	}
+
+	.gd-b2b-pending-banner .gd-b2b-pending-banner__cell--action {
+		justify-self: start !important;
+	}
+}
+
+/* =================================================================
+   Account panels (pending + active)
+   ================================================================= */
+
+.gd-b2b-account-panel {
+	box-sizing: border-box;
+	width: 100%;
+	max-width: 100%;
+	margin: 0 0 1.25rem;
+	padding: 1rem 1.15rem;
+	border-radius: 4px;
+	border: 1px solid rgba(0, 0, 0, .08);
+}
+
+.gd-b2b-account-panel--pending {
+	border-left: 4px solid #d97706;
+	background: #fffbeb;
+}
+
+.gd-b2b-account-panel--ok {
+	border-left: 4px solid #15803d;
+	background: #f0fdf4;
+}
+
+.gd-b2b-account-panel p {
+	margin: .4rem 0;
+	line-height: 1.45;
+}
+
+.gd-b2b-account-panel p:first-child {
+	margin-top: 0;
+}
+
+.gd-b2b-account-panel p:last-child {
+	margin-bottom: 0;
+	margin-inline-end: 0;
+}
+
+.gd-b2b-pending-banner__title {
+	font-weight: 700;
+	line-height: 1.35;
+}
+
+.gd-b2b-pending-banner__text {
+	line-height: 1.45;
+	color: inherit;
+}
