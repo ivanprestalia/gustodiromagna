@@ -1,0 +1,10 @@
+.DS_Store
+httpdocs/wp-config.php
+httpdocs/wp-content/backups/
+httpdocs/wp-content/akeebabackup_secretkey.php
+httpdocs/wp-content/upgrade/
+httpdocs/wp-content/upgrade-temp-backup/
+httpdocs/wp-content/cache/
+*.jpa
+*.zip
+.env
