@@ -1,0 +1,97 @@
+//
+// Component: Accordion
+//
+// ========================================================================
+
+
+// Variables
+// ========================================================================
+
+//
+// New
+//
+
+@accordion-default-title-font-family:           @global-primary-font-family;
+@accordion-default-title-font-weight:           @global-primary-font-weight;
+@accordion-default-title-text-transform:        @global-primary-text-transform;
+@accordion-default-title-letter-spacing:        @global-primary-letter-spacing;
+@accordion-default-title-font-style:            @global-primary-font-style;
+
+
+// Component
+// ========================================================================
+
+.hook-accordion() {}
+
+
+// Default modifier
+// ========================================================================
+
+//
+// Item
+//
+
+.hook-accordion-default-item() {}
+
+.hook-accordion-default-item-active() {}
+
+//
+// Title
+//
+
+.hook-accordion-default-title() when not (@accordion-default-title-font-family = inherit) {
+    font-family: @accordion-default-title-font-family;
+}
+
+.hook-accordion-default-title() when not (@accordion-default-title-font-weight = inherit) {
+    font-weight: @accordion-default-title-font-weight;
+}
+
+.hook-accordion-default-title() when not (@accordion-default-title-text-transform = inherit) {
+    text-transform: @accordion-default-title-text-transform;
+}
+
+.hook-accordion-default-title() when not (@accordion-default-title-letter-spacing = inherit) {
+    letter-spacing: @accordion-default-title-letter-spacing;
+}
+
+.hook-accordion-default-title() when not (@accordion-default-title-font-style = inherit) {
+    font-style: @accordion-default-title-font-style;
+}
+
+.hook-accordion-default-title-hover() {}
+
+.hook-accordion-default-title-active() {}
+
+//
+// Icon
+//
+
+.hook-accordion-default-icon() {}
+
+//
+// Content
+//
+
+.hook-accordion-default-content() {}
+
+
+// Miscellaneous
+// ========================================================================
+
+.hook-accordion-misc() {}
+
+
+// Inverse
+// ========================================================================
+
+.hook-inverse-accordion-default-item() {}
+.hook-inverse-accordion-default-item-active() {}
+
+.hook-inverse-accordion-default-title() {}
+.hook-inverse-accordion-default-title-hover() {}
+.hook-inverse-accordion-default-title-active() {}
+
+.hook-inverse-accordion-default-icon() {}
+
+.hook-inverse-accordion-default-content() {}

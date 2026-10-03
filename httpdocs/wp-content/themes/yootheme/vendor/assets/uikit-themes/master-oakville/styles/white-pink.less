@@ -1,0 +1,69 @@
+//
+// Global
+//
+@global-color:                #011E4A;
+@global-emphasis-color:       #011E4A;
+@global-link-color:           #D4004B;
+@global-danger-background:    #FF009B;
+@global-primary-background:   #D4004B;
+@global-secondary-background: #0A275E;
+@global-success-background:   #00CD5F;
+@global-warning-background:   #FFC11F;
+
+//
+// Alert
+//
+
+@alert-success-border: darken(@global-success-background, 6%);
+@alert-warning-border: darken(@global-warning-background, 10%);
+
+//
+// Button
+//
+
+@internal-button-secondary-gradient:     radial-gradient(lighten(@global-secondary-background, 2%), darken(@global-secondary-background, 2%));
+@internal-button-primary-hover-gradient: radial-gradient(lighten(@global-secondary-background, 2%), darken(@global-secondary-background, 2%));
+
+//
+// Card
+//
+
+@internal-card-secondary-gradient:       radial-gradient(lighten(@global-secondary-background, 2%), darken(@global-secondary-background, 2%));
+
+//
+// Divider
+//
+
+@divider-icon-color:       @global-primary-background;
+@divider-icon-line-border: @global-secondary-background;
+
+//
+// Label
+//
+
+@label-success-border: darken(@global-success-background, 4%);
+@label-warning-border: darken(@global-warning-background, 9%);
+@label-danger-border:  darken(@global-danger-background, 6%);
+
+//
+// Navbar
+//
+
+@internal-navbar-gradient:          linear-gradient(2deg,lighten(@global-secondary-background, 3%), lighten(@global-secondary-background, 6%));
+@navbar-nav-item-hover-background:  darken(#0f306c, 5%);
+@navbar-nav-item-active-background: @global-primary-background;
+@navbar-border:                     darken(@global-secondary-background, 6%);
+
+//
+// Notification
+//
+
+@notification-message-primary-background: lighten(@global-primary-background, 50%);
+@notification-message-success-background: lighten(@global-success-background, 35%);
+@notification-message-warning-background: lighten(@global-warning-background, 30%);
+
+//
+// Pagination
+//
+
+@pagination-item-active-border: darken(@global-primary-background, 7%);

@@ -1,0 +1,110 @@
+//
+// Component: Accordion
+//
+// ========================================================================
+
+
+// Variables
+// ========================================================================
+
+//
+// New
+//
+
+@accordion-default-item-border-width:          0;
+@accordion-default-item-border:                transparent;
+@accordion-default-item-active-border:         @accordion-default-item-border;
+
+
+// Component
+// ========================================================================
+
+.hook-accordion() {}
+
+
+// Default modifier
+// ========================================================================
+
+//
+// Item
+//
+
+.hook-accordion-default-item() when (@accordion-default-item-mode = divider) and not (@accordion-default-item-border-width = 0) {
+
+    &:nth-child(n+2) {
+        padding-top: @accordion-default-item-margin-top;
+        border-top: @accordion-default-item-border-width solid @accordion-default-item-border;
+    }
+
+}
+
+.hook-accordion-default-item() when (@accordion-default-item-mode = item) and not (@accordion-default-item-border-width = 0) {
+    border: @accordion-default-item-border-width solid @accordion-default-item-border;
+}
+
+.hook-accordion-default-item-active() when (@accordion-default-item-mode = item) and not (@accordion-default-item-border-width = 0) and not (@accordion-default-item-active-border = @accordion-default-item-border) {
+    border-color: @accordion-default-item-active-border;
+}
+
+//
+// Title
+//
+
+.hook-accordion-default-title() when (@accordion-default-item-mode = title) and not (@accordion-default-item-border-width = 0) {
+    border: @accordion-default-item-border-width solid @accordion-default-item-border;
+}
+
+.hook-accordion-default-title-hover() {}
+
+.hook-accordion-default-title-active() when (@accordion-default-item-mode = title) and not (@accordion-default-item-border-width = 0) and not (@accordion-default-item-active-border = @accordion-default-item-border) {
+    border-color: @accordion-default-item-active-border;
+}
+
+//
+// Icon
+//
+
+.hook-accordion-default-icon() {}
+
+//
+// Content
+//
+
+.hook-accordion-default-content() {}
+
+
+// Miscellaneous
+// ========================================================================
+
+.hook-accordion-misc() {}
+
+
+// Inverse
+// ========================================================================
+
+@inverse-accordion-default-item-border:                @inverse-global-border;
+@inverse-accordion-default-item-active-border:         @inverse-accordion-default-item-border;
+
+.hook-inverse-accordion-default-item() when (@accordion-default-item-mode = divider) and not (@accordion-default-item-border-width = 0) {
+
+    &:nth-child(n+2) { border-top-color: @inverse-accordion-default-item-border; }
+
+}
+.hook-inverse-accordion-default-item() when (@accordion-default-item-mode = item) and not (@accordion-default-item-border-width = 0) {
+    border-color: @inverse-accordion-default-item-border;
+}
+.hook-inverse-accordion-default-item-active() when (@accordion-default-item-mode = item) and not (@accordion-default-item-border-width = 0) and not (@inverse-accordion-default-item-active-border = @inverse-accordion-default-item-border) {
+    border-color: @inverse-accordion-default-item-active-border;
+}
+
+.hook-inverse-accordion-default-title() when (@accordion-default-item-mode = title) and not (@accordion-default-item-border-width = 0) {
+    border-color: @inverse-accordion-default-item-border;
+}
+.hook-inverse-accordion-default-title-hover() {}
+.hook-inverse-accordion-default-title-active() when (@accordion-default-item-mode = title) and not (@accordion-default-item-border-width = 0) and not (@inverse-accordion-default-item-active-border = @inverse-accordion-default-item-border) {
+    border-color: @inverse-accordion-default-item-active-border;
+}
+
+.hook-inverse-accordion-default-icon() {}
+
+.hook-inverse-accordion-default-content() {}

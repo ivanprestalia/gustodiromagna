@@ -1,0 +1,49 @@
+<?php
+
+$el = $this->el('div');
+
+// Icon
+$icon = $this->el('span', [
+
+    'class' => [
+        'uk-text-{icon_color} {@!link}',
+    ],
+
+    'uk-icon' => [
+        'icon: {icon};',
+        'width: {icon_width}; height: {icon_width}; {@!link_style: button}',
+    ],
+
+], '');
+
+// Link
+$link = $this->el('a', [
+
+    'class' => [
+        'uk-icon-link {@!link_style}',
+        'uk-icon-button {@link_style: button}',
+        'uk-link-{link_style: muted|text|reset}',
+    ],
+
+    'href' => ['{link}'],
+    'aria-label' => ['{link_aria_label}'],
+    'target' => ['_blank {@link_target}'],
+    'download' => $props['link_download'],
+    'rel' => [
+        'nofollow {@link_rel_nofollow}',
+        'noreferrer {@link_rel_noreferrer}'
+    ],
+    'uk-scroll' => str_contains((string) $props['link'], '#'),
+]);
+
+?>
+
+<?= $el($props, $attrs) ?>
+
+    <?php if ($props['link']) : ?>
+    <?= $link($props, $icon($props)) ?>
+    <?php else : ?>
+    <?= $icon($props) ?>
+    <?php endif ?>
+
+<?= $el->end() ?>

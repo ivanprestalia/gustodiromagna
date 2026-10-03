@@ -1,0 +1,250 @@
+//
+// Component: Navbar
+//
+// ========================================================================
+
+
+// Variables
+// ========================================================================
+
+//
+// New
+//
+
+@navbar-box-shadow:                             none;
+
+@navbar-group-box-shadow:                       none;
+
+@navbar-nav-item-box-shadow:                    none;
+@navbar-nav-item-hover-box-shadow:              none;
+@navbar-nav-item-active-box-shadow:             none;
+
+@navbar-sticky-box-shadow:                      none;
+
+@navbar-dropdown-box-shadow:                    none;
+
+
+// Component
+// ========================================================================
+
+.hook-navbar() {}
+
+
+// Container
+// ========================================================================
+
+//
+// 1. Make sure box shadow is not shown below content
+//    `z-index` is taken from `uk-navbar-center`
+// 2. This means the toolbar and headerbar also need a `z-index`, so
+//    there dropdowns are shown above the navbar
+//
+
+.hook-navbar-container() when not (@navbar-box-shadow = none) {
+    box-shadow: @navbar-box-shadow;
+    // 1
+    position: relative;
+    z-index: @global-z-index - 10;
+}
+
+// 2
+.tm-toolbar when not (@navbar-box-shadow = none) { z-index: @global-z-index - 10 + 2; }
+.tm-headerbar-top when not (@navbar-box-shadow = none) {
+    position: relative;
+    z-index: @global-z-index - 10 + 1;
+}
+
+
+// Nav
+// ========================================================================
+
+.hook-navbar-nav-item() when not (@navbar-border-mode = bottom-transparent) and not (@navbar-nav-item-box-shadow = none) {
+    box-shadow: @navbar-nav-item-box-shadow;
+}
+
+.hook-navbar-nav-item() when (@navbar-border-mode = bottom-transparent) and not (@navbar-nav-item-box-shadow = none) {
+
+    .uk-navbar-container:not(.uk-navbar-transparent) & { box-shadow: @navbar-nav-item-box-shadow; }
+
+}
+
+.hook-navbar-nav-item-hover() when not (@navbar-border-mode = bottom-transparent) and not (@navbar-nav-item-hover-box-shadow = none) {
+    box-shadow: @navbar-nav-item-hover-box-shadow;
+}
+
+.hook-navbar-nav-item-hover() when (@navbar-border-mode = bottom-transparent) and not (@navbar-nav-item-hover-box-shadow = none) {
+
+    .uk-navbar-container:not(.uk-navbar-transparent) & { box-shadow: @navbar-nav-item-hover-box-shadow; }
+
+}
+
+.hook-navbar-nav-item-onclick() {}
+
+.hook-navbar-nav-item-active() when not (@navbar-border-mode = bottom-transparent) and not (@navbar-nav-item-active-box-shadow = none) {
+    box-shadow: @navbar-nav-item-active-box-shadow;
+}
+
+.hook-navbar-nav-item-active() when (@navbar-border-mode = bottom-transparent) and not (@navbar-nav-item-active-box-shadow = none) {
+
+    .uk-navbar-container:not(.uk-navbar-transparent) & { box-shadow: @navbar-nav-item-active-box-shadow; }
+
+}
+
+
+// Item
+// ========================================================================
+
+.hook-navbar-item() when not (@navbar-border-mode = bottom-transparent) and not (@navbar-nav-item-box-shadow = none) {
+    box-shadow: @navbar-nav-item-box-shadow;
+}
+
+.hook-navbar-item() when (@navbar-border-mode = bottom-transparent) and not (@navbar-nav-item-box-shadow = none) {
+
+    .uk-navbar-container:not(.uk-navbar-transparent) & { box-shadow: @navbar-nav-item-box-shadow; }
+
+}
+
+
+// Toggle
+// ========================================================================
+
+.hook-navbar-toggle() when not (@navbar-border-mode = bottom-transparent) and not (@navbar-nav-item-box-shadow = none) {
+    box-shadow: @navbar-nav-item-box-shadow;
+}
+
+.hook-navbar-toggle() when (@navbar-border-mode = bottom-transparent) and not (@navbar-nav-item-box-shadow = none) {
+    .uk-navbar-container:not(.uk-navbar-transparent) & { box-shadow: @navbar-nav-item-box-shadow; }
+}
+
+.hook-navbar-toggle-hover() when not (@navbar-border-mode = bottom-transparent) and not (@navbar-nav-item-hover-box-shadow = none) {
+    box-shadow: @navbar-nav-item-hover-box-shadow;
+}
+
+.hook-navbar-toggle-hover() when (@navbar-border-mode = bottom-transparent) and not (@navbar-nav-item-hover-box-shadow = none) {
+    .uk-navbar-container:not(.uk-navbar-transparent) & { box-shadow: @navbar-nav-item-hover-box-shadow; }
+}
+
+.hook-navbar-toggle-icon() {}
+
+.hook-navbar-toggle-icon-hover() {}
+
+
+// Subtitle
+// ========================================================================
+
+.hook-navbar-subtitle() {}
+
+
+// Style modifiers
+// ========================================================================
+
+.hook-navbar-primary() {}
+
+.hook-navbar-transparent() {}
+
+.hook-navbar-sticky() when not (@navbar-sticky-box-shadow = none) {
+    &:not(.uk-navbar-transparent) { box-shadow: @navbar-sticky-box-shadow; }
+}
+
+
+// Dropdown
+// ========================================================================
+
+.hook-navbar-dropdown() when not (@navbar-dropdown-box-shadow = none) {
+    box-shadow: @navbar-dropdown-box-shadow;
+}
+
+.hook-navbar-dropdown-large() {}
+
+.hook-navbar-dropdown-dropbar() when not (@navbar-dropdown-box-shadow = none) {
+    box-shadow: none;
+}
+
+.hook-navbar-dropdown-dropbar-large() {}
+
+
+// Dropdown nav
+// ========================================================================
+
+.hook-navbar-dropdown-nav() {}
+
+.hook-navbar-dropdown-nav-item() {}
+
+.hook-navbar-dropdown-nav-item-hover() {}
+
+.hook-navbar-dropdown-nav-subtitle() {}
+
+.hook-navbar-dropdown-nav-header() {}
+
+.hook-navbar-dropdown-nav-divider() {}
+
+
+// Dropbar
+// ========================================================================
+
+.hook-navbar-dropbar() {}
+
+
+// Miscellaneous
+// ========================================================================
+
+.hook-navbar-misc() {}
+
+.hook-navbar-misc() when not (@navbar-border-mode = bottom-transparent) and not (@navbar-group-box-shadow = none) {
+
+    .uk-navbar-left,
+    .uk-navbar-right,
+    .uk-navbar-center:not(:has([class*="uk-navbar-center"])),
+    .uk-navbar-center-left { box-shadow: @navbar-group-box-shadow; }
+
+}
+
+.hook-navbar-misc() when (@navbar-border-mode = bottom-transparent) and not (@navbar-group-box-shadow = none) {
+
+    .uk-navbar-container:not(.uk-navbar-transparent) .uk-navbar-left,
+    .uk-navbar-container:not(.uk-navbar-transparent) .uk-navbar-right,
+    .uk-navbar-container:not(.uk-navbar-transparent) .uk-navbar-center:not(:has([class*="uk-navbar-center"])),
+    .uk-navbar-container:not(.uk-navbar-transparent) .uk-navbar-center-left { box-shadow: @navbar-group-box-shadow; }
+
+}
+
+
+// Inverse
+// ========================================================================
+
+@inverse-navbar-group-box-shadow:                   none;
+
+@inverse-navbar-nav-item-box-shadow:                none;
+@inverse-navbar-nav-item-hover-box-shadow:          none;
+@inverse-navbar-nav-item-active-box-shadow:         none;
+
+.hook-inverse-navbar-nav-item() when not (@navbar-border-mode = bottom-transparent) and not (@navbar-nav-item-box-shadow = none) {
+    box-shadow: @inverse-navbar-nav-item-box-shadow;
+}
+.hook-inverse-navbar-nav-item-hover() when not (@navbar-border-mode = bottom-transparent) and not (@navbar-nav-item-hover-box-shadow = none) {
+    box-shadow: @inverse-navbar-nav-item-hover-box-shadow;
+}
+.hook-inverse-navbar-nav-item-onclick() {}
+.hook-inverse-navbar-nav-item-active() when not (@navbar-border-mode = bottom-transparent) and not (@navbar-nav-item-active-box-shadow = none) {
+    box-shadow: @inverse-navbar-nav-item-active-box-shadow;
+}
+
+.hook-inverse-navbar-item() when not (@navbar-border-mode = bottom-transparent) and not (@navbar-nav-item-box-shadow = none) {
+    box-shadow: @inverse-navbar-nav-item-box-shadow;
+}
+
+.hook-inverse-navbar-toggle() when not (@navbar-border-mode = bottom-transparent) and not (@navbar-nav-item-box-shadow = none) {
+    box-shadow: @inverse-navbar-nav-item-box-shadow;
+}
+.hook-inverse-navbar-toggle-hover() when not (@navbar-border-mode = bottom-transparent) and not (@navbar-nav-item-hover-box-shadow = none) {
+    box-shadow: @inverse-navbar-nav-item-hover-box-shadow;
+}
+
+.hook-inverse() when not (@navbar-border-mode = bottom-transparent) and not (@navbar-group-box-shadow = none) {
+
+    .uk-navbar-left,
+    .uk-navbar-right,
+    .uk-navbar-center:not(:has([class*="uk-navbar-center"])),
+    .uk-navbar-center-left { box-shadow: @inverse-navbar-group-box-shadow; }
+
+}

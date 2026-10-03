@@ -1,0 +1,338 @@
+//
+// Component: Navbar
+//
+// ========================================================================
+
+
+// Variables
+// ========================================================================
+
+//
+// New
+//
+@navbar-border-mode:                                     bottom-transparent; // bottom-transparent, bottom, top-bottom, full
+@navbar-border-vertical-mode:                            ~''; // partial, all
+
+@navbar-border-width:                                    0;
+@navbar-border:                                          transparent;
+@internal-navbar-border-mode:                            ~''; // overlay
+
+@navbar-dropdown-border-width:                           0;
+@navbar-dropdown-border:                                 transparent;
+
+@internal-navbar-border-border-gradient:                 ~'';
+
+
+// Component
+// ========================================================================
+
+.hook-navbar() {}
+
+
+// Container
+// ========================================================================
+
+.hook-navbar-container() {}
+
+
+// Nav
+// ========================================================================
+
+.hook-navbar-nav-item() {}
+
+.hook-navbar-nav-item-hover() {}
+
+.hook-navbar-nav-item-onclick() {}
+
+.hook-navbar-nav-item-active() {}
+
+
+// Item
+// ========================================================================
+
+.hook-navbar-item() {}
+
+
+// Toggle
+// ========================================================================
+
+.hook-navbar-toggle() {}
+
+.hook-navbar-toggle-hover() {}
+
+.hook-navbar-toggle-icon() {}
+
+.hook-navbar-toggle-icon-hover() {}
+
+
+// Subtitle
+// ========================================================================
+
+.hook-navbar-subtitle() {}
+
+
+// Style modifiers
+// ========================================================================
+
+.hook-navbar-primary() {}
+
+.hook-navbar-transparent() {}
+
+.hook-navbar-sticky() {}
+
+
+// Dropdown
+// ========================================================================
+
+.hook-navbar-dropdown() when not (@navbar-dropdown-border-width = 0) {
+    border: @navbar-dropdown-border-width solid @navbar-dropdown-border;
+}
+
+.hook-navbar-dropdown-large() {}
+
+.hook-navbar-dropdown-dropbar() when not (@navbar-dropdown-border-width = 0) {
+    border: none;
+}
+
+.hook-navbar-dropdown-dropbar-large() {}
+
+
+// Dropdown nav
+// ========================================================================
+
+.hook-navbar-dropdown-nav() {}
+
+.hook-navbar-dropdown-nav-item() {}
+
+.hook-navbar-dropdown-nav-item-hover() {}
+
+.hook-navbar-dropdown-nav-subtitle() {}
+
+.hook-navbar-dropdown-nav-header() {}
+
+.hook-navbar-dropdown-nav-divider() {}
+
+
+// Dropbar
+// ========================================================================
+
+.hook-navbar-dropbar() {}
+
+
+// Miscellaneous
+// ========================================================================
+
+//
+// Mode Border Vertical Partial
+//
+
+.hook-navbar-misc() when (@navbar-border-vertical-mode = partial) and not (@navbar-border-width = 0) and (@navbar-container-padding = true) and not (@navbar-border-mode = top-bottom) and not (@navbar-border-mode = full) {
+
+    .uk-navbar-left { padding-right: @container-padding-horizontal; }
+    .uk-navbar-right { padding-left: @container-padding-horizontal; }
+
+    /* Phone landscape and bigger */
+    @media (min-width: @breakpoint-small) {
+
+        .uk-navbar-left { padding-right: @container-padding-horizontal-s; }
+        .uk-navbar-right { padding-left: @container-padding-horizontal-s; }
+
+    }
+
+    /* Tablet landscape and bigger */
+    @media (min-width: @breakpoint-medium) {
+
+        .uk-navbar-left { padding-right: @container-padding-horizontal-m; }
+        .uk-navbar-right { padding-left: @container-padding-horizontal-m; }
+
+    }
+
+}
+
+.hook-navbar-misc() when (@navbar-border-vertical-mode = partial) and not (@navbar-border-width = 0) {
+
+    .uk-navbar-left { border-right: @navbar-border-width solid @navbar-border; }
+    .uk-navbar-right { border-left: @navbar-border-width solid @navbar-border; }
+
+}
+
+.hook-navbar-transparent() when (@navbar-border-vertical-mode = partial) and not (@navbar-border-width = 0) and (@navbar-border-mode = bottom-transparent) {
+
+    .uk-navbar-left { border-right-color: transparent; }
+    .uk-navbar-right { border-left-color: transparent; }
+
+}
+
+//
+// Mode Border Vertical All
+//
+
+.hook-navbar-misc() when (@navbar-border-vertical-mode = all) and not (@navbar-border-width = 0) {
+
+    .uk-navbar-item,
+    .uk-navbar-toggle,
+    .uk-navbar-nav > li > a { border-right: @navbar-border-width solid @navbar-border; }
+
+    .uk-navbar-left,
+    .uk-navbar-right,
+    .uk-navbar-center:not(:has([class*="uk-navbar-center"])),
+    .uk-navbar-center-left { border-left: @navbar-border-width solid @navbar-border; }
+
+}
+
+.hook-navbar-transparent() when (@navbar-border-vertical-mode = all) and not (@navbar-border-width = 0) and (@navbar-border-mode = bottom-transparent) {
+
+    .uk-navbar-item,
+    .uk-navbar-toggle,
+    .uk-navbar-nav > li > a { border-right-color: transparent; }
+
+    .uk-navbar-left,
+    .uk-navbar-right,
+    .uk-navbar-center:not(:has([class*="uk-navbar-center"])),
+    .uk-navbar-center-left { border-left-color: transparent; }
+
+}
+
+.hook-navbar() when (@navbar-border-vertical-mode = all) and not (@navbar-border-width = 0) and (@navbar-border-mode = top-bottom),
+                    (@navbar-border-vertical-mode = all) and not (@navbar-border-width = 0) and (@navbar-border-mode = full) {
+
+    & > :first-child,
+    .uk-navbar-center-left { border-left: none !important; }
+    & > :last-child > :where(.uk-navbar-item:last-child, .uk-navbar-toggle:last-child, .uk-navbar-nav:last-child > li > a),
+    .uk-navbar-center-right > :where(.uk-navbar-item:last-child, .uk-navbar-toggle:last-child, .uk-navbar-nav:last-child > li > a) { border-right: none; }
+
+}
+
+//
+// Mode Border + Border Always
+//
+
+.hook-navbar-misc() when (@navbar-border-mode = bottom-transparent) and not (@navbar-border-width = 0),
+                         (@navbar-border-mode = bottom) and not (@navbar-border-width = 0) {
+
+    .uk-navbar-container { border-bottom: @navbar-border-width solid @navbar-border; }
+
+}
+
+.hook-navbar-misc() when (@navbar-border-mode = bottom-transparent) and not (@navbar-border-width = 0) and not (@internal-navbar-border-border-gradient = ~''),
+                         (@navbar-border-mode = bottom) and not (@navbar-border-width = 0) and not (@internal-navbar-border-border-gradient = ~'') {
+
+    .uk-navbar-container {
+        border-image: @internal-navbar-border-border-gradient;
+        border-image-slice: 1;
+    }
+
+}
+
+.hook-navbar-misc() when (@navbar-border-mode = bottom-transparent) and not (@navbar-border-width = 0) {
+
+    .uk-navbar-transparent { border-bottom-color: transparent; }
+}
+
+.hook-navbar-misc() when (@navbar-border-mode = bottom-transparent) and not (@navbar-border-width = 0) and not (@navbar-border-vertical-mode = ~''),
+                         (@navbar-border-mode = bottom) and not (@navbar-border-width = 0) and not (@navbar-border-vertical-mode = ~'') {
+
+    body:has(.tm-toolbar, .tm-headerbar-top) .tm-header .uk-navbar-container:not(.uk-navbar-sticky) { border-top: @navbar-border-width solid @navbar-border; }
+
+}
+
+.hook-navbar-transparent() when (@navbar-border-mode = bottom-transparent) and not (@navbar-border-width = 0) and not (@navbar-border-vertical-mode = ~'') {
+
+    body:has(.tm-toolbar, .tm-headerbar-top) .tm-header &.uk-navbar-container:not(.uk-navbar-sticky) { border-top-color: transparent; }
+
+}
+
+.hook-navbar-misc() when ((@navbar-border-mode = bottom-transparent) and not (@navbar-border-width = 0) and (@internal-navbar-border-mode = overlay)),
+                         ((@navbar-border-mode = bottom) and not (@navbar-border-width = 0) and (@internal-navbar-border-mode = overlay)) {
+
+    .uk-navbar-left,
+    .uk-navbar-right,
+    .uk-navbar-center { margin-bottom: -@navbar-border-width; }
+
+}
+
+//
+// Mode Top and Bottom
+//
+
+.hook-navbar() when (@navbar-border-mode = top-bottom) and not (@navbar-border-width = 0) {
+
+    border-bottom: @navbar-border-width solid @navbar-border;
+
+    body:has(.tm-toolbar, .tm-headerbar-top) .tm-header & { border-top: @navbar-border-width solid @navbar-border; }
+    body:has(.tm-toolbar, .tm-headerbar-top) .tm-header .uk-navbar-sticky & { border-top-color: transparent; }
+
+}
+
+//
+// Mode Full
+//
+
+.hook-navbar() when (@navbar-border-mode = full) and not (@navbar-border-width = 0) {
+
+    border: @navbar-border-width solid @navbar-border;
+
+}
+
+
+// Inverse
+// ========================================================================
+
+@inverse-navbar-border:                                transparent;
+
+.hook-inverse-navbar-nav-item() {}
+.hook-inverse-navbar-nav-item-hover() {}
+.hook-inverse-navbar-nav-item-onclick() {}
+.hook-inverse-navbar-nav-item-active() {}
+
+.hook-inverse-navbar-item() {}
+
+.hook-inverse-navbar-toggle() {}
+.hook-inverse-navbar-toggle-hover() {}
+
+.hook-inverse() when (@navbar-border-vertical-mode = partial) and not (@navbar-border-width = 0) and not (@navbar-border-mode = bottom-transparent) {
+
+    .uk-navbar-left { border-right-color: @inverse-navbar-border; }
+    .uk-navbar-right { border-left-color: @inverse-navbar-border; }
+
+}
+
+.hook-inverse() when (@navbar-border-vertical-mode = all) and not (@navbar-border-width = 0) and not (@navbar-border-mode = bottom-transparent) {
+
+    .uk-navbar-item,
+    .uk-navbar-toggle,
+    .uk-navbar-nav > li > a { border-right-color: @inverse-navbar-border; }
+
+    .uk-navbar-left,
+    .uk-navbar-right,
+    .uk-navbar-center:not(:has([class*="uk-navbar-center"])),
+    .uk-navbar-center-left { border-left-color: @inverse-navbar-border; }
+
+}
+
+.hook-inverse() when (@navbar-border-mode = bottom) and not (@navbar-border-width = 0) {
+
+    .uk-navbar-container,
+    &.uk-navbar-container { border-bottom-color: @inverse-navbar-border; }
+
+}
+
+.hook-inverse() when (@navbar-border-mode = bottom) and not (@navbar-border-width = 0) and not (@navbar-border-vertical-mode = ~'') {
+
+    body:has(.tm-toolbar, .tm-headerbar-top) .tm-header & .uk-navbar-container:not(.uk-navbar-sticky),
+    body:has(.tm-toolbar, .tm-headerbar-top) .tm-header &.uk-navbar-container:not(.uk-navbar-sticky) { border-top-color: @inverse-navbar-border; }
+
+}
+
+.hook-inverse() when (@navbar-border-mode = top-bottom) and not (@navbar-border-width = 0) {
+
+    .uk-navbar { border-bottom-color: @inverse-navbar-border; }
+
+    body:has(.tm-toolbar, .tm-headerbar-top) .tm-header & .uk-navbar { border-top-color: @inverse-navbar-border; }
+}
+
+.hook-inverse() when (@navbar-border-mode = full) and not (@navbar-border-width = 0) {
+
+    .uk-navbar { border-color: @inverse-navbar-border; }
+
+}

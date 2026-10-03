@@ -1,0 +1,18 @@
+<svg width="15" height="15" viewBox="0 0 15 15" xmlns="http://www.w3.org/2000/svg">
+    <style>
+        .uk-accordion-icon svg > [class*='line-'] {
+            transition: 0.2s ease-out;
+            transition-property: transform, opacity;
+            transform-origin: center;
+        }
+
+        [aria-expanded="true"] .uk-accordion-icon svg > .line-1 {
+            transform: rotate(-45deg);
+            opacity: 0;
+        }
+        
+        [aria-expanded="true"] .uk-accordion-icon svg > .line-2 { transform: rotate(90deg); }
+    </style>
+    <rect class="line-1" width="15" height="2" fill="#000" y="6.5" />
+    <rect class="line-2" width="2" height="15" fill="#000" x="6.5" />
+</svg>

@@ -1,0 +1,32 @@
+<?php
+
+namespace YOOtheme\Builder;
+
+class NormalizeTransform
+{
+    /**
+     * Transform callback.
+     *
+     * @param array<string, mixed> $params
+     */
+    public function __invoke(object $node, array $params): void
+    {
+        $type = $params['type'];
+
+        $node->attrs ??= [];
+        $node->children ??= [];
+
+        // Default to "null", if field not exists
+        $fields = $type->fields ?? [];
+
+        foreach ($type->panels ?? [] as $panel) {
+            if (isset($panel['fields'])) {
+                $fields += $panel['fields'];
+            }
+        }
+
+        foreach (array_keys(array_diff_key($fields, $node->props)) as $name) {
+            $node->props[$name] = null;
+        }
+    }
+}

@@ -1,0 +1,124 @@
+<?php
+
+/**
+ * Boostrap theme.
+ *
+ * @link https://developer.wordpress.org/themes/basics/theme-functions
+ */
+$app = require __DIR__ . '/bootstrap.php';
+$app->load(
+    __DIR__ .
+        '/{packages/{platform-wordpress,' .
+        'theme{,-consent,-highlight,-settings},' .
+        'builder{,-source*,-templates,-newsletter},' .
+        'styler,theme-wordpress*,builder-wordpress*}' .
+        '/bootstrap.php,config.php}',
+);
+
+
+add_action('wp_footer', function () {
+    if (!function_exists('is_checkout') || !is_checkout() || is_order_received_page()) {
+        return;
+    }
+    ?>
+    <script>
+    (function() {
+        function $(sel, root = document) { return root.querySelector(sel); }
+        function $all(sel, root = document) { return Array.from(root.querySelectorAll(sel)); }
+
+        function findTipoClienteValue() {
+            // Prova select/input standard
+            let el = document.querySelector('[name="billing_tipo_cliente"], #billing_tipo_cliente');
+            if (el) return (el.value || '').toLowerCase();
+
+            // Prova radio
+            let checked = document.querySelector('input[name="billing_tipo_cliente"]:checked');
+            if (checked) return (checked.value || '').toLowerCase();
+
+            return '';
+        }
+
+        function findFieldWrappers(fieldKey) {
+            // Cerca wrapper tipici nei blocchi/classico/plugin
+            const selectors = [
+                `#${fieldKey}_field`,
+                `[data-id="${fieldKey}"]`,
+                `[data-field-id="${fieldKey}"]`,
+                `[data-field-key="${fieldKey}"]`,
+                `[data-name="${fieldKey}"]`,
+                `[id*="${fieldKey}"]`,
+            ];
+
+            let wrappers = [];
+            selectors.forEach(sel => wrappers.push(...$all(sel)));
+
+            // Se trova l'input, risale al contenitore visivo
+            const input = document.querySelector(`[name="${fieldKey}"], #${fieldKey}`);
+            if (input) {
+                const container =
+                    input.closest('.wc-block-components-text-input') ||
+                    input.closest('.wc-block-components-form') ||
+                    input.closest('.wc-block-components-address-form__field') ||
+                    input.closest('.form-row') ||
+                    input.closest('p') ||
+                    input.parentElement;
+                if (container) wrappers.push(container);
+            }
+
+            // Dedup
+            return [...new Set(wrappers)];
+        }
+
+        function setVisible(elements, visible) {
+            elements.forEach(el => {
+                if (!el) return;
+                el.style.display = visible ? '' : 'none';
+
+                // Disabilita input interni quando nascosti
+                el.querySelectorAll('input, select, textarea').forEach(i => {
+                    i.disabled = !visible;
+                });
+            });
+        }
+
+        function toggleCompanyFields() {
+            const tipo = findTipoClienteValue();
+            const isAzienda = (tipo === 'azienda');
+
+            const companyFields = [
+                'billing_company',
+                'billing_piva',
+                'billing_sdi',
+                'billing_pec'
+            ];
+
+            companyFields.forEach(fieldKey => {
+                const wrappers = findFieldWrappers(fieldKey);
+                setVisible(wrappers, isAzienda);
+            });
+        }
+
+        // Primo run + ritardo breve (blocchi renderizzati async)
+        toggleCompanyFields();
+        setTimeout(toggleCompanyFields, 300);
+        setTimeout(toggleCompanyFields, 1000);
+
+        // Cambio diretto input/radio/select
+        document.addEventListener('change', function(e) {
+            const t = e.target;
+            if (!t) return;
+            if (
+                t.matches('[name="billing_tipo_cliente"], #billing_tipo_cliente') ||
+                t.matches('input[name="billing_tipo_cliente"]')
+            ) {
+                toggleCompanyFields();
+            }
+        });
+
+        // Rerender blocchi checkout
+        const observer = new MutationObserver(() => toggleCompanyFields());
+        observer.observe(document.body, { childList: true, subtree: true });
+    })();
+    </script>
+    <?php
+}, 99);

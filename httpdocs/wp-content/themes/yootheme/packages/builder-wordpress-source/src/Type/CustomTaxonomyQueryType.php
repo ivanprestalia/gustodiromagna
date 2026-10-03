@@ -1,0 +1,214 @@
+<?php
+
+namespace YOOtheme\Builder\Wordpress\Source\Type;
+
+use WP_Taxonomy;
+use WP_Term;
+use YOOtheme\Builder\Source;
+use YOOtheme\Builder\Wordpress\Source\Helper as SourceHelper;
+use YOOtheme\Str;
+use function YOOtheme\trans;
+
+/**
+ * @phpstan-import-type ObjectConfig from Source
+ */
+class CustomTaxonomyQueryType
+{
+    /**
+     * @return ObjectConfig
+     */
+    public static function config(WP_Taxonomy $taxonomy): array
+    {
+        $name = Str::camelCase($taxonomy->name, true);
+        $base = Str::camelCase(SourceHelper::getBase($taxonomy), true);
+
+        $plural = Str::lower($taxonomy->label);
+        $singular = Str::lower($taxonomy->labels->singular_name);
+
+        return [
+            'fields' => [
+                "custom{$name}" => [
+                    'type' => $name,
+
+                    'args' => [
+                        'id' => [
+                            'type' => 'Int',
+                        ],
+                    ],
+
+                    'metadata' => [
+                        'label' => trans('Custom %taxonomy%', [
+                            '%taxonomy%' => $taxonomy->labels->singular_name,
+                        ]),
+                        'group' => trans('Custom'),
+                        'fields' => [
+                            'id' => [
+                                'label' => $taxonomy->labels->singular_name,
+                                'type' => 'select',
+                                'defaultIndex' => 0,
+                                'options' => [
+                                    [
+                                        'evaluate' => "yootheme.builder.taxonomies['{$taxonomy->name}'].options",
+                                    ],
+                                ],
+                            ],
+                        ],
+                    ],
+
+                    'extensions' => [
+                        'call' => __CLASS__ . '::resolveTerm',
+                    ],
+                ],
+
+                "custom{$base}" => [
+                    'type' => [
+                        'listOf' => $name,
+                    ],
+
+                    'args' => [
+                        'id' => [
+                            'type' => 'Int',
+                            'defaultValue' => 0,
+                        ],
+                        'offset' => [
+                            'type' => 'Int',
+                            'defaultValue' => 0,
+                        ],
+                        'limit' => [
+                            'type' => 'Int',
+                            'defaultValue' => 10,
+                        ],
+                        'order' => [
+                            'type' => 'String',
+                            'defaultValue' => 'term_order',
+                        ],
+                        'order_direction' => [
+                            'type' => 'String',
+                            'defaultValue' => 'ASC',
+                        ],
+                    ],
+
+                    'metadata' => [
+                        'label' => trans('Custom %taxonomies%', [
+                            '%taxonomies%' => $taxonomy->label,
+                        ]),
+                        'group' => trans('Custom'),
+                        'fields' => ($taxonomy->hierarchical
+                            ? [
+                                'id' => [
+                                    'label' => trans('Parent %taxonomy%', [
+                                        '%taxonomy%' => $taxonomy->labels->singular_name,
+                                    ]),
+                                    'description' => trans(
+                                        '%taxonomies% are only loaded from the selected parent %taxonomy%.',
+                                        [
+                                            '%taxonomies%' => $taxonomy->label,
+                                            '%taxonomy%' => $singular,
+                                        ],
+                                    ),
+                                    'type' => 'select',
+                                    'options' => [
+                                        ['value' => 0, 'text' => trans('Root')],
+                                        [
+                                            'evaluate' => "yootheme.builder.taxonomies['{$taxonomy->name}'].options",
+                                        ],
+                                    ],
+                                ],
+                            ]
+                            : []) + [
+                            '_offset' => [
+                                'description' => trans(
+                                    'Set the starting point and limit the number of %taxonomies%.',
+                                    ['%taxonomies%' => $plural],
+                                ),
+                                'type' => 'grid',
+                                'width' => '1-2',
+                                'fields' => [
+                                    'offset' => [
+                                        'label' => trans('Start'),
+                                        'type' => 'number',
+                                        'modifier' => 1,
+                                        'attrs' => [
+                                            'min' => 1,
+                                            'required' => true,
+                                        ],
+                                    ],
+                                    'limit' => [
+                                        'label' => trans('Quantity'),
+                                        'type' => 'limit',
+                                        'attrs' => [
+                                            'min' => 1,
+                                        ],
+                                    ],
+                                ],
+                            ],
+                            '_order' => [
+                                'type' => 'grid',
+                                'width' => '1-2',
+                                'fields' => [
+                                    'order' => [
+                                        'label' => trans('Order'),
+                                        'type' => 'select',
+                                        'options' => [
+                                            trans('Term Order') => 'term_order',
+                                            trans('Alphabetical') => 'name',
+                                        ],
+                                    ],
+                                    'order_direction' => [
+                                        'label' => trans('Direction'),
+                                        'type' => 'select',
+                                        'options' => [
+                                            trans('Ascending') => 'ASC',
+                                            trans('Descending') => 'DESC',
+                                        ],
+                                    ],
+                                ],
+                            ],
+                        ],
+                    ],
+
+                    'extensions' => [
+                        'call' => [
+                            'func' => __CLASS__ . '::resolveTerms',
+                            'args' => ['taxonomy' => $taxonomy->name],
+                        ],
+                    ],
+                ],
+            ],
+        ];
+    }
+
+    /**
+     * @param array<string, mixed> $root
+     * @param array<string, mixed> $args
+     * @return ?WP_Term
+     */
+    public static function resolveTerm($root, array $args)
+    {
+        $term = get_term($args['id'] ?? 0);
+
+        return $term instanceof WP_Term ? $term : null;
+    }
+
+    /**
+     * @param array<string, mixed> $root
+     * @param array<string, mixed> $args
+     * @return array<WP_Term>
+     */
+    public static function resolveTerms($root, array $args): array
+    {
+        $query = [
+            'taxonomy' => $args['taxonomy'],
+            'orderby' => $args['order'],
+            'order' => $args['order_direction'],
+            'number' => $args['limit'],
+            'offset' => $args['offset'],
+        ];
+
+        if (is_taxonomy_hierarchical($args['taxonomy'])) {
+            $query['parent'] = $args['id'] ?? 0;
+        }
+
+        return get_terms($query);
+    }
+}

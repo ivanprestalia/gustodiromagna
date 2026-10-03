@@ -1,0 +1,74 @@
+<?php
+
+$el = $this->el('div', [
+
+    'class' => [
+        'uk-alert uk-margin-remove-first-child',
+        'uk-alert-{alert_style}',
+        'uk-padding {@alert_size}',
+    ],
+
+]);
+
+// Title
+$title = $this->el($props['title_element'], [
+
+    'class' => [
+        'el-title',
+        'uk-{title_style}',
+        'uk-display-inline uk-text-middle {@title_inline}',
+    ],
+
+]);
+
+// Content
+$content = $this->el('div', [
+
+    'class' => [
+        'el-content uk-panel',
+        'uk-text-{content_style}',
+        'uk-display-inline uk-text-middle {@title_inline}',
+        'uk-margin[-{content_margin}]-top {@!content_margin: remove} {@!title_inline}',
+    ],
+
+]);
+
+// Link
+$link = $props['link'] ? $this->el('a', [
+
+    'class' => [
+        'el-link uk-link-reset',
+    ],
+
+    'href' => ['{link}'],
+    'target' => ['_blank {@link_target}'],
+    'download' => $props['link_download'],
+    'rel' => [
+        'nofollow {@link_rel_nofollow}',
+        'noreferrer {@link_rel_noreferrer}'
+    ],
+    'uk-scroll' => str_contains((string) $props['link'], '#'),
+
+]) : null;
+
+?>
+
+<?= $el($props, $attrs) ?>
+
+    <?php if ($props['link']) : ?>
+    <?= $link($props) ?>
+    <?php endif ?>
+
+        <?php if ($props['title'] != '') : ?>
+        <?= $title($props, $props['title']) ?>
+        <?php endif ?>
+
+        <?php if ($props['content'] != '') : ?>
+        <?= $content($props, $props['content']) ?>
+        <?php endif ?>
+
+    <?php if ($props['link']) : ?>
+    <?= $link->end() ?>
+    <?php endif ?>
+
+<?= $el->end() ?>

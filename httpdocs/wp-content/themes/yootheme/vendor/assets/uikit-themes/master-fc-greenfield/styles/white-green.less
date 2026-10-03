@@ -1,0 +1,41 @@
+@internal-tile-primary-gradient: linear-gradient(20deg, #294131 0%, @global-primary-background                                                50%);
+
+//
+// Global
+//
+
+@global-color:                #393939;
+@global-emphasis-color:       #327447;
+@global-link-color:           #48A164;
+@global-link-hover-color:     #367C4B;
+@global-inverse-color:        #FFF;
+@global-primary-background:   #327447;
+@global-secondary-background: #262626;
+@global-success-background:   #3EB830;
+@global-danger-background:    #F45757;
+
+//
+// Button
+//
+
+@button-default-box-shadow:        0 5px 15px 0 fade(@global-primary-background, 30%);
+@button-default-hover-box-shadow:  0 5px 30px 0 fade(@global-primary-background, 60%);
+@button-default-active-box-shadow: 0 5px 15px 0 fade(@global-primary-background, 30%);
+
+//
+// Navbar
+//
+
+@internal-navbar-border-border-gradient: linear-gradient(90deg, saturate(@global-primary-background, 20%) 30%, @global-secondary-background 80%);
+
+//
+// Section
+//
+
+@internal-section-primary-gradient: linear-gradient(10deg, darken(@global-primary-background, 15%) 5%, @global-primary-background 60%);
+
+//
+// Text
+//
+
+@internal-text-background-color-gradient: linear-gradient(90deg, @text-background-color 50%, darken(@text-background-color, 20%) 100%);

@@ -1,0 +1,24 @@
+<svg width="18" height="18" viewBox="0 0 18 18" xmlns="http://www.w3.org/2000/svg">
+    <style>
+        .uk-accordion-icon svg > [class*='line-'],
+        .uk-accordion-icon svg > [class*='background-'] {
+            transition: 0.2s ease-out;
+            transition-property: transform, opacity;
+            transform-origin: center;
+        }
+        [aria-expanded="true"] .uk-accordion-icon svg > .line-1 {
+            transform: rotate(-45deg);
+            opacity: 0;
+        }
+        [aria-expanded="true"] .uk-accordion-icon svg > .line-2 { transform: rotate(90deg); }
+
+        .uk-accordion-icon svg > .background-1 { opacity: 0; }
+        [aria-expanded="true"] .uk-accordion-icon svg > .background-1 { opacity: 1; }
+        .uk-accordion-icon svg > .background-2 { opacity: 1; }
+        [aria-expanded="true"] .uk-accordion-icon svg > .background-2 { opacity: 0; }
+    </style>
+    <path class="background-1" fill="#000" d="M17.66,6.49c.51.39.26,5.79.26,5.79h-3.15c-1.03,0-3.56-.07-8.29-.06-1.74,0-6.94.71-6.43,0s.06-5.91.13-5.79c.06.19,4.56-.06,6.36-.06l5.79.13h2.44c2.25,0,2.25.19,2.89,0Z" />
+    <path class="background-2" fill="#000" d="M17.66,6.49c.51.39.26,5.79.26,5.79h-3.15c-1.03,0-2.25-.39-2.57,0s0,3.79,0,5.72c0,0-5.21,0-5.72-.51-.45-.51,0-3.34,0-5.27-1.74,0-6.94.71-6.43,0s.06-5.91.13-5.79c.06.19,4.56-.06,6.36-.06V.19l1.48-.13,1.48-.06,3.02.51c0,.32-.19,1.48-.19,2.7v3.28h2.44c2.25,0,2.25.19,2.89,0Z" />
+    <path class="line-1 uk-preserve" fill="#333" d="M17.92,9.26c0,.26-.19.51-.45.51-.84.06-1.09.06-2.06.06-1.29,0-2.64,0-4.24-.06-.19,0-.39-.06-.58-.06s-.32-.06-.51-.06c0,0,.11-.01-1.41.06-.39,0-.71,0-1.03.06-.96.06-1.74.13-2.19.06-.71-.06-2.51,0-3.41,0h-.32c-.39,0-.84-.06-1.03-.06-.26,0-.45-.26-.45-.51s.26-.51.51-.45c.19,0,.64.06.96.06h3.86c.39.06,1.16,0,2.06-.06.32,0,.71,0,1.09-.06l.9-.13h.39c.26,0,.51.06.71.06.13,0,.26.06.45.06,2.76.13,6.24.06,6.24.06.26,0,.45.19.51.45Z" />
+    <path class="line-2 uk-preserve" fill="#333" d="M9.69,9.64v4.18c0,.45,0,.9.06,1.41,0,.39.06.77.06,1.16s-.19.84-.19,1.03c0,.26-.13.45-.39.45h-.13c-.26,0-.39-.26-.39-.51,0-.19.06-.64.06-.96s0-.71-.06-1.03c-.06-.51-.13-1.03-.06-1.54.06-.58.06-5.79.06-5.79,0-.26.06-1.8.13-3.34,0-.39.06-.64.06-.71l.06-.84-.13-2.51c0-.26.19-.51.45-.51s.51.19.51.45c0,0,.06,1.35,0,2.51v.84c0,.06,0,.39-.06.71-.06.96-.13,3.02-.13,3.28l.06,1.74Z" />
+</svg>

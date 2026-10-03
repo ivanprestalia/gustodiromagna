@@ -1,0 +1,85 @@
+<?php
+
+namespace YOOtheme\Theme\Wordpress\Listener;
+
+use YOOtheme\Config;
+use YOOtheme\Http\Request;
+use YOOtheme\Url;
+
+class AddAdminBarButton
+{
+    protected Config $config;
+    protected Request $request;
+
+    public function __construct(Config $config, Request $request)
+    {
+        $this->config = $config;
+        $this->request = $request;
+    }
+
+    /**
+     * Fires after WP_Admin_Bar is initialized.
+     *
+     * @link https://developer.wordpress.org/reference/hooks/admin_bar_init/
+     */
+    public function init(): void
+    {
+        wp_add_inline_style('admin-bar', $this->getStyle());
+    }
+
+    /**
+     * Loads all necessary admin bar items.
+     *
+     * @param \WP_Admin_Bar $admin_bar
+     *
+     * @link https://developer.wordpress.org/reference/hooks/admin_bar_menu/
+     */
+    public function menu($admin_bar): void
+    {
+        if (!current_user_can('edit_theme_options')) {
+            return;
+        }
+
+        $icon = '<span class="ab-icon" aria-hidden="true"></span>';
+        $title = "<span class=\"ab-label\" aria-hidden=\"true\">{$this->config->get(
+            'theme.name',
+            '',
+        )}</span>";
+        $title .= "<span class=\"screen-reader-text\">{$this->config->get(
+            'theme.name',
+            '',
+        )}</span>";
+
+        $site = (string) $this->request->getUri();
+
+        $admin_bar->add_node([
+            'id' => 'yootheme',
+            'title' => $icon . $title,
+            'href' => Url::route('customizer', [
+                'site' => $site,
+                'return' => $site,
+            ]),
+            'meta' => ['title' => $this->config->get('theme.name', '')],
+        ]);
+    }
+
+    protected function getStyle(): string
+    {
+        $font = Url::to('~theme/packages/theme-wordpress/fonts/icon.ttf');
+        return <<<CSS
+            @font-face {
+                font-family: YOOtheme;
+                font-display: swap;
+                src: url('{$font}') format('truetype');
+                font-weight: 400;
+                font-style: normal;
+            }
+
+            #wp-admin-bar-yootheme .ab-icon:before {
+                font-family: YOOtheme;
+                content: "\\f111";
+                top: 2px;
+            }
+        CSS;
+    }
+}

@@ -1,0 +1,47 @@
+//
+// Global
+//
+
+@global-color:                #002216;
+@global-emphasis-color:       #002216;
+@global-link-color:           #06A462;
+@global-danger-background:    #F42600;
+@global-primary-background:   #06A477;
+@global-secondary-background: #045237;
+@global-warning-background:   #F1D000;
+
+//
+// Button
+//
+
+@internal-button-primary-hover-gradient: radial-gradient(lighten(@global-secondary-background, 1%), darken(@global-secondary-background, 1%));
+@internal-button-secondary-gradient:     radial-gradient(lighten(@global-secondary-background, 1%), darken(@global-secondary-background, 1%));
+
+//
+// Card
+//
+
+@internal-card-secondary-gradient:       radial-gradient(lighten(@global-secondary-background, 1%), darken(@global-secondary-background, 1%));
+@internal-card-secondary-hover-gradient: radial-gradient(darken(@global-secondary-background, 2%), darken(@global-secondary-background, 4%));
+
+//
+// Divider
+//
+
+@divider-icon-color:       @global-primary-background;
+@divider-icon-line-border: @global-secondary-background;
+
+//
+// Navbar
+//
+
+@internal-navbar-gradient:          linear-gradient(2deg, darken(#078E68, 1%), lighten(#078E68, 2%));
+@navbar-nav-item-hover-background:  darken(@global-primary-background, 12%);
+@navbar-nav-item-active-background: @global-primary-background;
+@navbar-border:                     darken(#078E68, 5%);
+
+//
+// Notification
+//
+
+@notification-message-primary-background: lighten(@global-primary-background, 40%);

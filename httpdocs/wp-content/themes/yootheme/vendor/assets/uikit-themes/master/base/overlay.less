@@ -1,0 +1,113 @@
+//
+// Component: Overlay
+//
+// ========================================================================
+
+
+// Variables
+// ========================================================================
+
+//
+// New
+//
+
+@overlay-default-inverse-background:            @overlay-default-background;
+@overlay-primary-inverse-background:            @overlay-primary-background;
+
+@overlay-default-backdrop-filter:               ~'';
+@overlay-primary-backdrop-filter:               ~'';
+
+@internal-overlay-default-backdrop-filter:      ~'';
+@internal-overlay-primary-backdrop-filter:      ~'';
+
+
+// Component
+// ========================================================================
+
+.hook-overlay() {}
+
+
+// Icon
+// ========================================================================
+
+.hook-overlay-icon() {}
+
+
+// Style modifiers
+// ========================================================================
+
+//
+// Default
+//
+
+// Adapt color for light or dark backgrounds
+.hook-overlay-default() when not (@overlay-default-color-mode = light) and not (@overlay-default-inverse-background = @overlay-default-background) {
+
+    .uk-inverse-light & { background-color: @overlay-default-inverse-background; }
+
+}
+
+.hook-overlay-default() when not (@overlay-default-color-mode = dark) and not (@overlay-default-inverse-background = @overlay-default-background) {
+
+    .uk-inverse-dark & { background-color: @overlay-default-inverse-background; }
+
+}
+
+// Filter
+.hook-overlay-default() when not (@overlay-default-backdrop-filter = ~'') and (@internal-overlay-default-backdrop-filter = ~'') {
+    backdrop-filter: @overlay-default-backdrop-filter;
+    -webkit-backdrop-filter: @overlay-default-backdrop-filter;
+}
+
+// Url
+.hook-overlay-default() when (@overlay-default-backdrop-filter = ~'') and not (@internal-overlay-default-backdrop-filter = ~'') {
+    backdrop-filter: url("@{internal-overlay-default-backdrop-filter}");
+    -webkit-backdrop-filter: url("@{internal-overlay-default-backdrop-filter}");
+}
+
+// Both
+.hook-overlay-default() when not (@overlay-default-backdrop-filter = ~'') and not (@internal-overlay-default-backdrop-filter = ~'') {
+    backdrop-filter: @overlay-default-backdrop-filter url("@{internal-overlay-default-backdrop-filter}");
+    -webkit-backdrop-filter: @overlay-default-backdrop-filter url("@{internal-overlay-default-backdrop-filter}");
+}
+
+//
+// Primary
+//
+
+// Adapt color for light or dark backgrounds
+.hook-overlay-primary() when not (@overlay-primary-color-mode = light) and not (@overlay-primary-inverse-background = @overlay-primary-background) {
+
+    .uk-inverse-light & { background-color: @overlay-primary-inverse-background; }
+
+}
+
+.hook-overlay-primary() when not (@overlay-primary-color-mode = dark) and not (@overlay-primary-inverse-background = @overlay-primary-background) {
+
+    .uk-inverse-dark & { background-color: @overlay-primary-inverse-background; }
+
+}
+
+// Filter
+.hook-overlay-primary() when not (@overlay-primary-backdrop-filter = ~'') and (@internal-overlay-primary-backdrop-filter = ~'') {
+    backdrop-filter: @overlay-primary-backdrop-filter;
+    -webkit-backdrop-filter: @overlay-primary-backdrop-filter;
+}
+
+// Url
+.hook-overlay-primary() when (@overlay-primary-backdrop-filter = ~'') and not (@internal-overlay-primary-backdrop-filter = ~'') {
+    backdrop-filter: url("@{internal-overlay-primary-backdrop-filter}");
+    -webkit-backdrop-filter: url("@{internal-overlay-primary-backdrop-filter}");
+}
+
+// Both
+.hook-overlay-primary() when not (@overlay-primary-backdrop-filter = ~'') and not (@internal-overlay-primary-backdrop-filter = ~'') {
+    backdrop-filter: @overlay-primary-backdrop-filter url("@{internal-overlay-primary-backdrop-filter}");
+    -webkit-backdrop-filter: @overlay-primary-backdrop-filter url("@{internal-overlay-primary-backdrop-filter}");
+}
+
+
+// Miscellaneous
+// ========================================================================
+
+.hook-overlay-misc() {}

@@ -1,0 +1,135 @@
+//
+// Component: Accordion
+//
+// ========================================================================
+
+
+// Variables
+// ========================================================================
+
+//
+// New
+//
+
+@accordion-default-item-transition-duration:   0.1s;
+
+@accordion-default-item-mode:                  divider; // divider, item, title
+@accordion-default-item-background:            transparent;
+@accordion-default-item-active-background:     @accordion-default-item-background;
+
+@accordion-default-title-padding-vertical:     0;
+@accordion-default-title-padding-horizontal:   0;
+
+@accordion-default-icon-color:                 @global-color;
+
+@accordion-default-content-padding-horizontal: 0;
+@accordion-default-content-padding-bottom:     @accordion-default-content-padding-horizontal;
+
+
+// Component
+// ========================================================================
+
+.hook-accordion() {}
+
+
+// Default modifier
+// ========================================================================
+
+//
+// Item
+//
+
+.hook-accordion-default-item() when (@accordion-default-item-mode = item) and not (@accordion-default-item-active-background = @accordion-default-item-background),
+                            (@accordion-default-item-mode = item) and not (@accordion-default-item-border-width = 0) and not (@inverse-accordion-default-item-active-border = @inverse-accordion-default-item-border),
+                            (@accordion-default-item-mode = item) and not (@accordion-default-item-active-box-shadow = @accordion-default-item-box-shadow) {
+    transition: @accordion-default-item-transition-duration ease-in-out;
+    transition-property: color, background-color, border-color, box-shadow;
+}
+
+.hook-accordion-default-item() when (@accordion-default-item-mode = item) and not (@accordion-default-item-background = transparent) {
+    background: @accordion-default-item-background;
+}
+
+.hook-accordion-default-item-active() when (@accordion-default-item-mode = item) and not (@accordion-default-item-active-background = @accordion-default-item-background) {
+    background: @accordion-default-item-active-background;
+}
+
+//
+// Title
+//
+
+.hook-accordion-default-title() when (@accordion-default-item-mode = title) and not (@accordion-default-item-active-background = @accordion-default-item-background),
+                            (@accordion-default-item-mode = title) and not (@accordion-default-item-border-width = 0) and not (@inverse-accordion-default-item-active-border = @inverse-accordion-default-item-border),
+                            (@accordion-default-item-mode = title) and not (@accordion-default-item-active-box-shadow = @accordion-default-item-box-shadow) {
+    transition: @accordion-default-item-transition-duration ease-in-out;
+    transition-property: color, background-color, border-color, box-shadow;
+}
+
+.hook-accordion-default-title() {}
+
+.hook-accordion-default-title-active() {}
+
+.hook-accordion-default-title() when not (@accordion-default-title-padding-vertical = 0), not (@accordion-default-title-padding-horizontal = 0) {
+    padding: @accordion-default-title-padding-vertical @accordion-default-title-padding-horizontal;
+}
+
+.hook-accordion-default-title() when not (@base-link-text-decoration = none) {
+    text-decoration: none;
+}
+
+.hook-accordion-default-title() when (@accordion-default-item-mode = title) and not (@accordion-default-item-background = transparent) {
+    background: @accordion-default-item-background;
+}
+
+.hook-accordion-default-title-hover() {}
+
+.hook-accordion-default-title-active() when (@accordion-default-item-mode = title) and not (@accordion-default-item-active-background = @accordion-default-item-background) {
+    background: @accordion-default-item-active-background;
+}
+
+//
+// Icon
+//
+
+.hook-accordion-default-icon() { color: @accordion-default-icon-color; }
+
+//
+// Content
+//
+
+.hook-accordion-default-content() when not (@accordion-default-content-padding-bottom = 0), not (@accordion-default-content-padding-horizontal = 0) {
+    padding: 0 @accordion-default-content-padding-horizontal @accordion-default-content-padding-bottom @accordion-default-content-padding-horizontal;
+}
+
+
+// Miscellaneous
+// ========================================================================
+
+.hook-accordion-misc() {}
+
+
+// Inverse
+// ========================================================================
+
+@inverse-accordion-default-item-background:            transparent;
+@inverse-accordion-default-item-active-background:     @inverse-accordion-default-item-background;
+@inverse-accordion-default-icon-color:                 @inverse-global-color;
+
+.hook-inverse-accordion-default-item() when (@accordion-default-item-mode = item) and not (@inverse-accordion-default-item-background = transparent) {
+    background-color: @inverse-accordion-default-item-background;
+}
+.hook-inverse-accordion-default-item-active() when (@accordion-default-item-mode = item) and not (@inverse-accordion-default-item-active-background = @inverse-accordion-default-item-background) {
+    background: @inverse-accordion-default-item-active-background;
+}
+
+.hook-inverse-accordion-default-title() when (@accordion-default-item-mode = title) and not (@inverse-accordion-default-item-background = transparent) {
+    background-color: @inverse-accordion-default-item-background;
+}
+.hook-inverse-accordion-default-title-hover() {}
+.hook-inverse-accordion-default-title-active() when (@accordion-default-item-mode = title) and not (@inverse-accordion-default-item-active-background = @inverse-accordion-default-item-background) {
+    background: @inverse-accordion-default-item-active-background;
+}
+
+.hook-inverse-accordion-default-icon() { color: @inverse-accordion-default-icon-color; }
+
+.hook-inverse-accordion-default-content() {}

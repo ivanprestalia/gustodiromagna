@@ -1,0 +1,106 @@
+//
+// Component: Accordion
+//
+// ========================================================================
+
+
+// Variables
+// ========================================================================
+
+//
+// New
+//
+
+@accordion-default-item-box-shadow:             none;
+@accordion-default-item-active-box-shadow:      @accordion-default-item-box-shadow;
+
+
+// Component
+// ========================================================================
+
+.hook-accordion() {}
+
+
+// Default modifier
+// ========================================================================
+
+//
+// Item
+//
+
+.hook-accordion-default-item() when (@accordion-default-item-mode = divider) and not (@accordion-default-item-box-shadow = none) {
+
+    &:nth-child(n+2) { box-shadow: @accordion-default-item-box-shadow; }
+
+}
+
+.hook-accordion-default-item() when (@accordion-default-item-mode = item) and not (@accordion-default-item-box-shadow = none) {
+    box-shadow: @accordion-default-item-box-shadow;
+}
+
+.hook-accordion-default-item-active() when (@accordion-default-item-mode = item) and not (@accordion-default-item-active-box-shadow = @accordion-default-item-box-shadow) {
+    box-shadow: @accordion-default-item-active-box-shadow;
+}
+
+//
+// Title
+//
+
+.hook-accordion-default-title() when (@accordion-default-item-mode = title) and not (@accordion-default-item-box-shadow = none) {
+    box-shadow: @accordion-default-item-box-shadow;
+}
+
+.hook-accordion-default-title-hover() {}
+
+.hook-accordion-default-title-active() when (@accordion-default-item-mode = title) and not (@accordion-default-item-active-box-shadow = @accordion-default-item-box-shadow) {
+    box-shadow: @accordion-default-item-active-box-shadow;
+}
+
+//
+// Icon
+//
+
+.hook-accordion-default-icon() {}
+
+//
+// Content
+//
+
+.hook-accordion-default-content() {}
+
+
+// Miscellaneous
+// ========================================================================
+
+.hook-accordion-misc() {}
+
+
+// Inverse
+// ========================================================================
+
+@inverse-accordion-default-item-box-shadow:             none;
+@inverse-accordion-default-item-active-box-shadow:      @inverse-accordion-default-item-box-shadow;
+
+.hook-inverse-accordion-default-item() when (@accordion-default-item-mode = divider) and not (@accordion-default-item-box-shadow = none) {
+
+    &:nth-child(n+2) { box-shadow: @inverse-accordion-default-item-box-shadow; }
+
+}
+.hook-inverse-accordion-default-item() when (@accordion-default-item-mode = item) and not (@accordion-default-item-box-shadow = none) {
+    box-shadow: @inverse-accordion-default-item-box-shadow;
+}
+.hook-inverse-accordion-default-item-active() when (@accordion-default-item-mode = item) and not (@inverse-accordion-default-item-active-box-shadow = @inverse-accordion-default-item-box-shadow) {
+    box-shadow: @inverse-accordion-default-item-active-box-shadow;
+}
+
+.hook-inverse-accordion-default-title() when (@accordion-default-item-mode = title) and not (@accordion-default-item-box-shadow = none) {
+    box-shadow: @inverse-accordion-default-item-box-shadow;
+}
+.hook-inverse-accordion-default-title-hover() {}
+.hook-inverse-accordion-default-title-active() when (@accordion-default-item-mode = title) and not (@inverse-accordion-default-item-active-box-shadow = @inverse-accordion-default-item-box-shadow) {
+    box-shadow: @inverse-accordion-default-item-active-box-shadow;
+}
+
+.hook-inverse-accordion-default-icon() {}
+
+.hook-inverse-accordion-default-content() {}

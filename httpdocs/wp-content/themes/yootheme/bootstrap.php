@@ -1,0 +1,18 @@
+<?php
+
+namespace YOOtheme;
+
+$root = __DIR__;
+$cache = "{$root}/cache";
+$loader = require "{$root}/vendor/autoload.php";
+
+File::makeDir($cache);
+
+Path::setAlias('~theme', $root);
+Path::setAlias('~assets', "{$root}/assets");
+Path::setAlias('~assets/uikit', "{$root}/vendor/assets/uikit");
+
+$app = Application::getInstance($cache);
+$app->load('~theme/packages/{application,encryption,image,translation,http{-message,-server},view{,-metadata}}/bootstrap.php');
+
+return $app;

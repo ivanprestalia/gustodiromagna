@@ -1,0 +1,84 @@
+<?php
+
+// => grid
+$nav = $this->el('ul', [
+
+    'class' => [
+        'el-nav',
+        'uk-{filter_style} {@filter_style: tab}',
+    ],
+
+    'uk-scrollspy-class' => in_array($props['animation'], ['none', 'parallax']) || !$props['item_animation'] ? false : (!empty($props['animation'])
+                            ? ['uk-animation-{0}' => $props['animation']]
+                            : true),
+
+]);
+
+$nav_horizontal = [
+    'uk-subnav {@filter_style: subnav.*}',
+    'uk-{filter_style} {@filter_style: subnav-.*}',
+    'uk-flex-{filter_align: right|center}',
+    'uk-child-width-expand {@filter_align: justify}',
+    'uk-flex-nowrap {@filter_wrap}',
+];
+
+$nav_vertical = [
+    'uk-nav uk-nav-{0} [uk-text-left {@text_align}] {@filter_style: subnav.*}' => $props['filter_style_primary'] ? 'primary' : 'default',
+    'uk-tab-{filter_position} {@filter_style: tab}',
+];
+
+$nav_attrs = $props['filter_position'] === 'top'
+    ? [
+        'class' => $nav_horizontal,
+        'uk-margin' => (bool) preg_match('/^subnav/', $props['filter_style']),
+        ]
+    : [
+        'class' => $nav_vertical,
+        'uk-toggle' => [
+            "cls: {$this->expr(array_merge($nav_vertical, $nav_horizontal), $props)};",
+            'mode: media;',
+            'media: @{filter_grid_breakpoint};',
+        ],
+    ];
+
+// Container
+$container = $props['filter_wrap'] ? $this->el('div', [
+
+    'class' => [
+        'uk-panel',
+    ],
+
+    'uk-overflow-fade' => true,
+
+]) : null;
+
+($container ?: $nav)->attr('class', [
+    'uk-margin[-{filter_margin}] {@filter_position: top}',
+]);
+
+?>
+
+<?php if ($container) : ?>
+<?= $container($props) ?>
+<?php endif ?>
+
+<?= $nav($props, $nav_attrs) ?>
+
+    <?php if ($props['filter_all']) : ?>
+    <li class="uk-active" uk-filter-control><a href><?= $this->trans($props['filter_all_label'] ?: 'All') ?></a></li>
+    <?php endif ?>
+
+    <?php foreach ($tags as $tag => $name) : ?>
+    <li<?= $this->attrs([
+        'class' => ['uk-active' => $tag === array_key_first($tags) && !$props['filter_all']],
+        'uk-filter-control' => json_encode(['filter' => '[data-tag~="' . str_replace('"', '\"', $tag) . '"]']),
+    ]) ?>>
+        <a href><?= $name ?></a>
+    </li>
+    <?php endforeach ?>
+
+<?= $nav->end() ?>
+
+<?php if ($container) : ?>
+<?= $container->end() ?>
+<?php endif ?>

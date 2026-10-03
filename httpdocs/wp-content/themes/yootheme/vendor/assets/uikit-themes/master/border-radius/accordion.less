@@ -1,0 +1,78 @@
+//
+// Component: Accordion
+//
+// ========================================================================
+
+
+// Variables
+// ========================================================================
+
+//
+// New
+//
+
+@accordion-default-item-border-radius:          0;
+
+// Component
+// ========================================================================
+
+.hook-accordion() {}
+
+
+// Default modifier
+// ========================================================================
+
+//
+// Item
+//
+
+.hook-accordion-default-item() when (@accordion-default-item-mode = item) and not (@accordion-default-item-border-radius = 0) {
+    border-radius: @accordion-default-item-border-radius;
+}
+
+.hook-accordion-default-item-active() {}
+
+//
+// Title
+//
+
+.hook-accordion-default-title() when (@accordion-default-item-mode = title) and not (@accordion-default-item-border-radius = 0) {
+    border-radius: @accordion-default-item-border-radius;
+}
+
+.hook-accordion-default-title-hover() {}
+
+.hook-accordion-default-title-active() {}
+
+//
+// Icon
+//
+
+.hook-accordion-default-icon() {}
+
+//
+// Content
+//
+
+.hook-accordion-default-content() {}
+
+
+// Miscellaneous
+// ========================================================================
+
+.hook-accordion-misc() {}
+
+
+// Inverse
+// ========================================================================
+
+.hook-inverse-accordion-default-item() {}
+.hook-inverse-accordion-default-item-active() {}
+
+.hook-inverse-accordion-default-title() {}
+.hook-inverse-accordion-default-title-hover() {}
+.hook-inverse-accordion-default-title-active() {}
+
+.hook-inverse-accordion-default-icon() {}
+
+.hook-inverse-accordion-default-content() {}

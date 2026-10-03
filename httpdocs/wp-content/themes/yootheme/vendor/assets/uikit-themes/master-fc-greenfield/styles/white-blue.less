@@ -1,0 +1,71 @@
+//
+// Global
+//
+
+@global-color:                #010829;
+@global-emphasis-color:       #061E9A;
+@global-muted-color:          #787885;
+@global-link-color:           #061E9A;
+@global-link-hover-color:     #091A85;
+@global-inverse-color:        #FFFFFF;
+@global-primary-background:   #061E9A;
+@global-secondary-background: #0B0B0B;
+@global-success-background:   #0CDA60;
+@global-danger-background:    #EE063D;
+
+//
+// Button
+//
+
+@button-default-box-shadow:        0 5px 15px 0 fade(@global-primary-background, 30%);
+@button-default-hover-box-shadow:  0 5px 30px 0 fade(@global-primary-background, 60%);
+@button-default-active-box-shadow: 0 5px 15px 0 fade(@global-primary-background, 30%);
+
+//
+// Dropdown
+//
+
+@dropdown-nav-item-color:               fade(@global-inverse-color, 60%);
+@dropdown-nav-item-hover-color:         @global-inverse-color;
+@dropdown-nav-sublist-item-color:       fade(@global-inverse-color, 60%);
+@dropdown-nav-sublist-item-hover-color: @global-inverse-color;
+
+//
+// Inverse
+//
+
+@inverse-base-code-color:               @global-inverse-color;
+@inverse-base-link-color:               fade(@global-inverse-color, 60%);
+@inverse-base-link-hover-color:         @global-inverse-color;
+@inverse-heading-bullet-border:         @global-inverse-color;
+@inverse-heading-divider-border:        @global-inverse-color;
+@inverse-heading-line-border:           @global-inverse-color;
+@inverse-pagination-item-hover-border:  lighten(@global-primary-background, 20%);
+@inverse-pagination-item-active-border: lighten(@global-primary-background, 20%);
+@inverse-text-primary-color:            lighten(@global-emphasis-color, 40%);
+
+//
+// Navbar
+//
+
+@internal-navbar-border-border-gradient:        linear-gradient(90deg, lighten(@global-primary-background, 20%) 20%, lighten(@global-secondary-background, 5%) 100%);
+@navbar-dropdown-focus-outline:                 @global-inverse-color;
+@navbar-dropdown-nav-item-color:                fade(@global-inverse-color, 60%);
+@navbar-dropdown-nav-item-hover-color:          @global-inverse-color;
+@navbar-dropdown-nav-item-active-color:         @global-inverse-color;
+@navbar-dropdown-nav-sublist-item-color:        fade(@global-inverse-color, 60%);
+@navbar-dropdown-nav-sublist-item-hover-color:  @global-inverse-color;
+@navbar-dropdown-nav-sublist-item-active-color: @global-inverse-color;
+
+//
+// Section
+//
+
+@internal-section-primary-gradient: linear-gradient(10deg, darken(@global-primary-background, 15%) 5%, @global-primary-background 60%);
+
+
+//
+// Text
+//
+
+@internal-text-background-color-gradient: linear-gradient(90deg, @text-background-color 50%, darken(@text-background-color, 20%) 100%);

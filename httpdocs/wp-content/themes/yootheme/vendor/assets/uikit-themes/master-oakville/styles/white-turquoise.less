@@ -1,0 +1,59 @@
+//
+// Global
+//
+
+@global-color:                #374758;
+@global-emphasis-color:       #2D3C4B;
+@global-link-color:           #4DACB4;
+@global-muted-color:          #97A2AC;
+@global-danger-background:    #FF122D;
+@global-muted-background:     #FBFBFB;
+@global-primary-background:   #4BB7C1;
+@global-secondary-background: #293745;
+@global-warning-background:   #FDB922;
+
+//
+// Alert
+//
+
+@alert-warning-border: darken(@global-warning-background, 9%);
+@alert-danger-border:  darken(@global-danger-background, 9%);
+
+//
+// Button
+//
+
+@button-disabled-color: #C5CACE;
+
+//
+// Divider
+//
+
+@divider-icon-color:       @global-primary-background;
+@divider-icon-line-border: @global-secondary-background;
+
+//
+// Label
+//
+
+@label-success-border: darken(@global-primary-background, 5%);
+@label-warning-border: darken(@global-warning-background, 9%);
+@label-danger-border:  darken(@global-danger-background, 9%);
+
+//
+// Navbar
+//
+
+@internal-navbar-gradient:          linear-gradient(2deg,lighten(@global-secondary-background, 1%), lighten(@global-secondary-background, 3%));
+@navbar-nav-item-hover-background:  darken(#293745, 6%);
+@navbar-nav-item-active-background: #47B8C2;
+@navbar-background:                 @global-secondary-background;
+@navbar-border:                     darken(@global-secondary-background, 5%);
+
+//
+// Notification
+//
+
+@notification-message-primary-background: lighten(@global-primary-background, 38%);
+@notification-message-warning-background: lighten(@global-warning-background, 30%);
+@notification-message-danger-background:  lighten(@global-danger-background, 38%);

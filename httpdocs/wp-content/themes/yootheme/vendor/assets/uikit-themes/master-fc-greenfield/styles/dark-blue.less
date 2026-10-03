@@ -1,0 +1,335 @@
+@internal-section-primary-gradient:       linear-gradient(10deg, #103879 5%, #1C62D3 60%);
+@internal-tile-primary-gradient:          linear-gradient(10deg, #103879 5%, #1C62D3 60%);
+@internal-text-background-color-gradient: linear-gradient(90deg, #1C62D3 70%, #538ce8 100%);
+
+//
+// Global
+//
+
+@global-color:                  #E9E9EB;
+@global-emphasis-color:         #FFFFFF;
+@global-inverse-color:          #081F58;
+@global-link-color:             #98BAFF;
+@global-muted-color:            rgba(208, 208, 208, 0.63);
+@global-link-hover-color:       #D5DFFF;
+@global-background:             #111A2B;
+@global-muted-background:       #1A2138;
+@global-primary-background:     #1C62D3;
+@global-secondary-background:   #081F58;
+@global-border:                 rgba(233, 233, 236, 0.1);
+
+//
+// Theme
+//
+
+@theme-page-container-background: @global-primary-background;
+
+//
+// Accordion
+//
+
+@accordion-default-item-background: @global-muted-background;
+@accordion-default-title-color:     @global-emphasis-color;
+
+//
+// Alert
+//
+
+@alert-primary-color: @global-emphasis-color;
+@alert-success-color: @global-emphasis-color;
+@alert-warning-color: @global-emphasis-color;
+@alert-danger-color:  @global-emphasis-color;
+
+//
+// Badge
+//
+
+@badge-color: @global-emphasis-color;
+
+//
+// Base
+//
+
+@base-link-color:       fade(@global-emphasis-color, 50%);
+@base-link-hover-color: @global-emphasis-color;
+@base-ins-background:   fade(@global-primary-background, 30%);
+@base-mark-background:  fade(@global-primary-background, 30%);
+
+//
+// Button
+//
+
+@button-default-hover-color:         @global-emphasis-color;
+@button-default-active-color:        @global-emphasis-color;
+@button-primary-color:               @global-emphasis-color;
+@button-primary-hover-color:         @global-emphasis-color;
+@button-primary-active-color:        @global-emphasis-color;
+@button-secondary-color:             @global-emphasis-color;
+@button-secondary-hover-color:       @global-emphasis-color;
+@button-secondary-active-color:      @global-emphasis-color;
+@button-danger-color:                @global-emphasis-color;
+@button-danger-hover-color:          @global-emphasis-color;
+@button-danger-active-color:         @global-emphasis-color;
+@button-default-box-shadow:          0 15px 35px 0 fade(darken(@global-secondary-background, 10%), 70%);
+@button-default-hover-box-shadow:    0 15px 35px 0 fade(darken(@global-secondary-background, 14%), 80%);
+@button-default-active-box-shadow:   0 15px 35px 0 fade(darken(@global-secondary-background, 14%), 90%);
+@button-primary-box-shadow:          0 15px 40px 0 fade(@global-primary-background, 15%);
+@button-primary-hover-box-shadow:    0 15px 40px 0 fade(@global-primary-background, 25%);
+@button-primary-active-box-shadow:   0 15px 40px 0 fade(@global-primary-background, 35%);
+@button-secondary-box-shadow:        0 15px 35px 0 fade(darken(@global-secondary-background, 10%), 70%);
+@button-secondary-hover-box-shadow:  0 15px 35px 0 fade(darken(@global-secondary-background, 14%), 80%);
+@button-secondary-active-box-shadow: 0 15px 35px 0 fade(darken(@global-secondary-background, 14%), 90%);
+
+//
+// Card
+//
+
+@card-default-background:         @global-muted-background;
+@card-default-color-mode:         light;
+@card-default-hover-background:   @global-muted-background;
+@card-primary-color:              @global-emphasis-color;
+@card-secondary-color:            @global-emphasis-color;
+@card-overlay-color-mode:         light;
+@card-hover-box-shadow:           0 30px 60px 0 rgba(9, 20, 106, 0.25);
+@card-default-box-shadow:         0 30px 60px 0 rgba(9, 20, 106, 0.25);
+@card-default-hover-box-shadow:   0 28px 50px 0 rgba(9, 20, 106, 0.6);
+@card-primary-box-shadow:         0 30px 60px 0 rgba(28, 98, 211, 0.2);
+@card-secondary-box-shadow:       0 30px 60px 0 rgba(3, 12, 33, 0.41);
+@card-secondary-hover-box-shadow: 0 30px 60px 0 rgba(3, 10, 29, 0.77);
+
+
+//
+// Close
+//
+
+@close-color:       fade(@global-color, 60%);
+@close-hover-color: @global-color;
+
+//
+// Dotnav
+//
+
+@dotnav-item-background:         darken(@global-primary-background, 25%);
+@dotnav-item-onclick-background: darken(@global-primary-background, 15%);
+
+//
+// Dropdown
+//
+
+@dropdown-nav-item-color:         @global-emphasis-color;
+@dropdown-nav-header-color:       @global-emphasis-color;
+@dropdown-nav-sublist-item-color: @global-emphasis-color;
+
+//
+// Form
+//
+
+@form-range-track-background:       fade(@global-primary-background, 20%);
+@form-range-track-focus-background: fade(@global-primary-background, 40%);
+
+//
+// Icon
+//
+
+@icon-overlay-color:            saturate(@global-primary-background, 30%);
+@icon-overlay-hover-color:      fade(@global-primary-background, 80%);
+@icon-link-hover-color:         @global-primary-background;
+@icon-link-active-color:        @global-primary-background;
+@icon-button-color:             @global-emphasis-color;
+@icon-button-hover-background:  fade(@global-primary-background, 70%);
+@icon-button-hover-color:       @global-emphasis-color;
+@icon-button-active-background: fade(@global-primary-background, 50%);
+@icon-button-active-color:      @global-emphasis-color;
+
+//
+// Inverse
+//
+
+@inverse-global-border:                    rgba(0, 0, 0, 0.2);
+@inverse-global-color-mode:                dark;
+@inverse-global-inverse-color:             @global-emphasis-color;
+@inverse-global-primary-background:        @global-primary-background;
+@inverse-badge-color:                      @global-emphasis-color;
+@inverse-base-code-color:                  @global-primary-background;
+@inverse-button-primary-background:        @global-emphasis-color;
+@inverse-button-primary-hover-background:  fade(@global-emphasis-color, 90%);
+@inverse-button-primary-active-background: @global-emphasis-color;
+@inverse-button-secondary-color:           @global-emphasis-color;
+@inverse-button-secondary-hover-color:     @global-emphasis-color;
+@inverse-button-secondary-active-color:    @global-emphasis-color;
+@inverse-icon-button-color:                @global-emphasis-color;
+@inverse-navbar-nav-item-color:            @global-secondary-background;
+@inverse-navbar-nav-item-hover-color:      @global-primary-background;
+@inverse-navbar-nav-item-onclick-color:    @global-primary-background;
+@inverse-navbar-nav-item-active-color:     @global-primary-background;
+@inverse-subnav-pill-item-hover-color:     @global-emphasis-color;
+@inverse-subnav-pill-item-onclick-color:   @global-emphasis-color;
+@inverse-subnav-pill-item-active-color:    @global-emphasis-color;
+@inverse-text-meta-color:                  fade(@global-emphasis-color, 80%);
+@inverse-text-muted-color:                 fade(@global-emphasis-color, 80%);
+@inverse-text-primary-color:               @global-primary-background;
+@inverse-totop-color:                      @global-emphasis-color;
+@inverse-totop-hover-color:                @global-emphasis-color;
+@inverse-totop-active-color:               @global-emphasis-color;
+
+//
+// Label
+//
+
+@label-color:         @global-emphasis-color;
+@label-success-color: darken(@global-success-background, 30%);
+@label-warning-color: darken(@global-warning-background, 37%);
+@label-danger-color:  darken(@global-danger-background, 40%);
+
+//
+// Link
+//
+
+@link-heading-hover-color: @global-emphasis-color;
+
+//
+// Marker
+//
+
+@marker-color:            @global-emphasis-color;
+@marker-hover-background: darken(@global-primary-background, 10%);
+@marker-hover-color:      @global-emphasis-color;
+
+//
+// Modal
+//
+
+@modal-close-outside-color:       fade(@global-color, 60%);
+@modal-close-outside-hover-color: @global-color;
+
+//
+// Nav
+//
+
+@nav-default-item-color:                  @global-emphasis-color;
+@nav-default-item-hover-color:            @global-primary-background;
+@nav-default-item-active-color:           @global-primary-background;
+@nav-default-sublist-item-color:          @global-emphasis-color;
+@nav-default-sublist-item-hover-color:    @global-primary-background;
+@nav-default-sublist-item-active-color:   @global-primary-background;
+@nav-primary-item-color:                  @global-emphasis-color;
+@nav-primary-item-hover-color:            @global-primary-background;
+@nav-primary-item-active-color:           @global-primary-background;
+@nav-primary-sublist-item-color:          @global-emphasis-color;
+@nav-primary-sublist-item-hover-color:    @global-primary-background;
+@nav-primary-sublist-item-active-color:   @global-primary-background;
+@nav-secondary-item-hover-background:     @global-primary-background;
+@nav-secondary-item-active-background:    @global-primary-background;
+@nav-secondary-subtitle-color:            @global-emphasis-color;
+@nav-secondary-sublist-item-color:        @global-emphasis-color;
+@nav-secondary-sublist-item-hover-color:  @global-primary-background;
+@nav-secondary-sublist-item-active-color: @global-primary-background;
+
+//
+// Navbar
+//
+
+@navbar-color-mode:                             light;
+@navbar-nav-item-color:                         @global-emphasis-color;
+@navbar-nav-item-hover-color:                   @global-emphasis-color;
+@navbar-nav-item-line-onclick-background:       @global-primary-background;
+@navbar-item-color:                             @global-emphasis-color;
+@navbar-toggle-color:                           @global-emphasis-color;
+@navbar-dropdown-nav-item-color:                @global-emphasis-color;
+@navbar-dropdown-nav-sublist-item-color:        @global-emphasis-color;
+
+//
+// Notification
+//
+
+@notification-message-primary-color: @global-emphasis-color;
+@notification-message-success-color: @global-emphasis-color;
+@notification-message-warning-color: @global-emphasis-color;
+@notification-message-danger-color:  @global-emphasis-color;
+
+//
+// Progress
+//
+
+@progress-background: fade(@global-primary-background, 20%);
+
+//
+// Search
+//
+
+@search-default-border:         @global-primary-background;
+@search-navbar-background:      fade(@global-primary-background, 20%);
+@search-navbar-focus-border:    fade(@global-primary-background, 80%);
+@search-toggle-color:           @global-primary-background;
+@search-toggle-hover-color:     fade(@global-primary-background, 70%);
+
+//
+// Section
+//
+
+@section-default-color-mode: light;
+@section-muted-color-mode:   light;
+
+//
+// Slidenav
+//
+
+@slidenav-color:             @global-emphasis-color;
+@slidenav-hover-background:  darken(@global-primary-background, 10%);
+@slidenav-hover-color:       @global-emphasis-color;
+@slidenav-active-background: @global-primary-background;
+@slidenav-active-color:      @global-emphasis-color;
+
+//
+// Subnav
+//
+
+@subnav-pill-item-background:         fade(darken(@global-secondary-background, 10%), 60%);
+@subnav-pill-item-hover-background:   @global-primary-background;
+@subnav-pill-item-onclick-background: fade(@global-primary-background, 85%);
+@subnav-pill-item-box-shadow:         none;
+@subnav-pill-item-hover-box-shadow:   0 15px 40px 0 rgba(28, 98, 211, 0.46);
+@subnav-pill-item-active-background:  @global-primary-background;
+@subnav-pill-item-active-box-shadow:  0 15px 40px 0 rgba(28, 98, 211, 0.46);
+
+//
+// Tab
+//
+
+@tab-item-hover-border: @global-primary-background;
+
+//
+// Text
+//
+
+@text-secondary-color: #F3F8FF;
+
+//
+// Thumbnav
+//
+
+@thumbnav-item-gradient:     linear-gradient(15deg, rgba(28, 98, 211, 0.2) 0%, rgba(28, 98, 211, 0) 100%);
+@thumbnav-item-hover-border: @global-primary-background;
+
+//
+// Tile
+//
+
+@tile-default-color-mode: light;
+@tile-muted-color-mode:   light;
+
+//
+// Tooltip
+//
+
+@tooltip-color: @global-emphasis-color;
+
+//
+// Totop
+//
+
+@totop-color:             @global-emphasis-color;
+@totop-hover-background:  darken(@global-primary-background, 15%);
+@totop-hover-color:       @global-emphasis-color;
+@totop-active-background: @global-primary-background;
+@totop-active-color:      @global-emphasis-color;

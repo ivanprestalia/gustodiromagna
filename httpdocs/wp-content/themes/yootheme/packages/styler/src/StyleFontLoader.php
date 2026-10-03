@@ -1,0 +1,260 @@
+<?php
+
+namespace YOOtheme\Theme\Styler;
+
+use YOOtheme\File;
+use YOOtheme\Http\Uri;
+use YOOtheme\HttpClientInterface;
+use YOOtheme\Path;
+
+class StyleFontLoader
+{
+    public const VERSION = '2';
+    public const PREFIX = 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/42.0.2311.135 Safari/537.36 ';
+
+    public HttpClientInterface $client;
+    public string $cache;
+
+    /**
+     * @var array<string, string>
+     */
+    public array $formats;
+
+    public function __construct(HttpClientInterface $client, string $cache)
+    {
+        File::makeDir($cache, 0777, true);
+
+        $formats = ['woff2' => self::PREFIX . 'Edge/17.17134'];
+
+        $this->cache = $cache;
+        $this->client = $client;
+        $this->formats = $formats;
+    }
+
+    /**
+     * Creates CSS markup.
+     */
+    public function css(string $url, string $basePath): ?string
+    {
+        $date = date(DATE_W3C);
+        $hash = hash('crc32b', join(',', [$url, $basePath, static::VERSION]));
+        $file = "{$this->cache}/font-{$hash}.css";
+
+        // is already cached?
+        if (
+            is_file($file) &&
+            filemtime($file) >= strtotime('-1 week') &&
+            is_string($data = file_get_contents($file))
+        ) {
+            return preg_replace('/^\/\*.+?\*\/\s*/', '', $data);
+        }
+
+        // load font url
+        $fonts = $this->load($url);
+
+        // relative font path
+        foreach ($fonts as &$font) {
+            $font['src'] = array_map(fn($path) => Path::relative($basePath, $path), $font['src']);
+        }
+
+        // generate fonts css
+        $info = "/* {$url} generated on {$date} */\n";
+        $data = join('', array_map([$this, 'cssFontFace'], $fonts));
+
+        // save file in cache
+        if ($fonts && @file_put_contents($file, $info . $data)) {
+            return $data;
+        }
+
+        return null;
+    }
+
+    /**
+     * Creates a single @font-face CSS markup.
+     *
+     * @param array<string, string|list<string>> $font
+     */
+    public function cssFontFace(array $font): string
+    {
+        $output = '@font-face {';
+
+        foreach ($font as $name => $value) {
+            if ($name == 'src') {
+                $urls = [];
+
+                foreach ($value as $format => $url) {
+                    $urls[] = "url({$url}) format('{$format}')";
+                }
+
+                $value = join(', ', $urls);
+            }
+
+            $output .= "{$name}: {$value}; ";
+        }
+
+        return "{$output}}\n";
+    }
+
+    /**
+     * Loads fonts from url.
+     *
+     * @return list<array<string, string|list<string>>>
+     */
+    public function load(string $url): array
+    {
+        $fonts = [];
+
+        foreach ($this->parseFontFamilies($url) as $url) {
+            // load font formats based on user agents
+            foreach ($this->formats as $userAgent) {
+                $options = ['userAgent' => $userAgent];
+                $response = $this->client->get($url, $options);
+
+                if ($result = $this->parseFonts($response->getBody())) {
+                    $fonts = array_replace_recursive($fonts, $result);
+                }
+            }
+        }
+
+        // load fonts and save them
+        foreach ($fonts as &$font) {
+            $font['src'] = array_map(
+                fn($url) => $this->loadFont(
+                    $url,
+                    preg_replace('/[^a-z]/', '', strtolower($font['font-family'])),
+                ),
+                $font['src'],
+            );
+        }
+
+        return $fonts;
+    }
+
+    /**
+     * Load font file from url.
+     *
+     * @param array<string, string> $options
+     */
+    public function loadFont(string $url, string $name, array $options = []): ?string
+    {
+        $hash = hash('crc32b', $url);
+        $type = pathinfo($url, PATHINFO_EXTENSION);
+        $file = "{$this->cache}/{$name}-{$hash}.{$type}";
+
+        // is already cached?
+        if (file_exists($file)) {
+            return $file;
+        }
+
+        // load font from url
+        $data = $this->client->get($url, $options);
+
+        // save file in cache
+        if (@file_put_contents($file, $data->getBody())) {
+            return $file;
+        }
+
+        return null;
+    }
+
+    /**
+     * Parses font @import from source.
+     *
+     * @return list<string>
+     */
+    public function parse(string $source): array
+    {
+        return preg_match(
+            '/@import\s+url\((https?:\/\/fonts\.googleapis\.com[^)]+)\)\s*;?/i',
+            $source,
+            $matches,
+        )
+            ? $matches
+            : [];
+    }
+
+    /**
+     * Parses fonts url from source.
+     *
+     * @return array<string, array<string, string|array<string, string>>>
+     */
+    public function parseFonts(string $source): array
+    {
+        $fonts = [];
+
+        foreach ($this->parseFontFaces($source) as $fontface) {
+            $src = [];
+            $font = [];
+
+            foreach ($this->parseFontProperties($fontface) as $name => $value) {
+                if ($name == 'src') {
+                    $src = $this->parseFontSrc($value);
+                } else {
+                    $font[$name] = $value;
+                }
+            }
+
+            if (!empty($src)) {
+                $hash = hash('crc32b', json_encode($font));
+                $fonts[$hash] = array_merge($font, ['src' => $src]);
+            }
+        }
+
+        return $fonts;
+    }
+
+    /**
+     * Parses font url from source.
+     *
+     * @return array<string, string>
+     */
+    public function parseFontSrc(string $source): array
+    {
+        return preg_match('/url\((https?:\/\/.+?)\)\s*format\(\'?(\w+)/', $source, $matches)
+            ? [$matches[2] => $matches[1]]
+            : [];
+    }
+
+    /**
+     * Parses @font-face from source.
+     *
+     * @return list<string>
+     */
+    public function parseFontFaces(string $source): array
+    {
+        return preg_match_all('/@font-face\s*{\s*([^}]+)/', $source, $matches) ? $matches[1] : [];
+    }
+
+    /**
+     * Parses properties from source.
+     *
+     *
+     * @return array<string, string>
+     */
+    public function parseFontProperties(string $source): array
+    {
+        return preg_match_all('/([\w-]+)\s*:\s*([^;]+)/', $source, $matches)
+            ? array_combine($matches[1], $matches[2])
+            : [];
+    }
+
+    /**
+     * Split url into separate urls, one per font family.
+     *
+     * @return list<string>
+     */
+    protected function parseFontFamilies(string $url): array
+    {
+        $uri = new Uri($url);
+        $query = $uri->getQueryParams();
+
+        if (isset($query['family'])) {
+            return array_map(
+                fn($family) => (string) $uri->withQueryParams(['family' => $family] + $query),
+                explode('|', $query['family']),
+            );
+        }
+
+        return [$url];
+    }
+}
