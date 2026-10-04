@@ -51,6 +51,7 @@ class GD_B2B_Pricing {
 		add_filter( 'woocommerce_dropdown_variation_attribute_options_args', array( $this, 'filter_dropdown_args' ) );
 		add_filter( 'woocommerce_product_get_default_attributes', array( $this, 'filter_default_attributes' ), 10, 2 );
 		add_filter( 'woocommerce_product_variation_get_price', array( $this, 'filter_variation_price' ), 20, 2 );
+		add_filter( 'woocommerce_structured_data_product_offer', array( $this, 'filter_schema_offer' ), 99, 2 );
 		add_filter( 'woocommerce_variation_prices_price', array( $this, 'filter_variation_price' ), 20, 2 );
 	}
 
@@ -275,6 +276,37 @@ class GD_B2B_Pricing {
 			return $price;
 		}
 		return wc_format_decimal( (float) $price * ( 1 - $pct / 100 ), wc_get_price_decimals() );
+	}
+
+	/**
+	 * Dati strutturati: intervallo prezzi solo con le varianti disponibili.
+	 * Priorità alta per sovrascrivere anche Advanced Dynamic Pricing.
+	 *
+	 * @param array      $offer   Offerta schema.org.
+	 * @param WC_Product $product Prodotto.
+	 * @return array
+	 */
+	public function filter_schema_offer( $offer, $product ) {
+		if ( 'all' === $this->get_context() || ! $product instanceof WC_Product_Variable || ! is_array( $offer ) ) {
+			return $offer;
+		}
+		$prices = $product->get_variation_prices( false );
+		$values = array_values( (array) ( $prices['price'] ?? array() ) );
+		if ( array() === $values ) {
+			return $offer;
+		}
+		$low  = wc_format_decimal( min( $values ), wc_get_price_decimals() );
+		$high = wc_format_decimal( max( $values ), wc_get_price_decimals() );
+		if ( $low === $high ) {
+			unset( $offer['lowPrice'], $offer['highPrice'], $offer['offerCount'] );
+			$offer['@type'] = 'Offer';
+			$offer['price'] = $low;
+		} else {
+			$offer['lowPrice']   = $low;
+			$offer['highPrice']  = $high;
+			$offer['offerCount'] = count( $values );
+		}
+		return $offer;
 	}
 
 	/**
