@@ -21,7 +21,11 @@ class GD_B2B_Admin {
 	/** @var GD_B2B_Admin_Email_Templates */
 	private GD_B2B_Admin_Email_Templates $email_templates;
 
+	/** @var GD_B2B_Admin_Pricing */
+	private GD_B2B_Admin_Pricing $pricing;
+
 	public function __construct() {
+		$this->pricing         = new GD_B2B_Admin_Pricing();
 		$this->ajax            = new GD_B2B_Admin_Ajax();
 		$this->settings        = new GD_B2B_Admin_Settings();
 		$this->email_templates = new GD_B2B_Admin_Email_Templates();
@@ -34,6 +38,7 @@ class GD_B2B_Admin {
 		$this->ajax->init();
 		$this->settings->init();
 		$this->email_templates->init();
+		$this->pricing->init();
 		add_action( 'admin_menu', array( $this, 'register_menu' ), 26 );
 		add_action( 'admin_enqueue_scripts', array( $this, 'enqueue_assets' ), 30 );
 	}
@@ -111,6 +116,14 @@ class GD_B2B_Admin {
 			$cap,
 			'gd-b2b-settings',
 			array( GD_B2B_Plugin::instance()->admin->settings, 'render_page' )
+		);
+		add_submenu_page(
+			'gd-b2b-clients',
+			__( 'Prezzi B2B', 'gd-b2b' ),
+			__( 'Prezzi B2B', 'gd-b2b' ),
+			$cap,
+			'gd-b2b-pricing',
+			array( $this->pricing, 'render_page' )
 		);
 		add_submenu_page(
 			'gd-b2b-clients',

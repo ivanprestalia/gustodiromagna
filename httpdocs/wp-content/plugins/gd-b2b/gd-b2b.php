@@ -3,7 +3,7 @@
  * Plugin Name:       GD-B2B
  * Plugin URI:        https://gustodiromagna.com
  * Description:       Registrazione aziende B2B, campi checkout (blocchi), validazione ordini fino all'assegnazione di un ruolo commerciale.
- * Version:           2.0.0
+ * Version:           2.1.0
  * Requires at least: 6.0
  * Requires PHP:      7.4
  * Author:            Gusto di Romagna
@@ -16,7 +16,7 @@
 
 defined( 'ABSPATH' ) || exit;
 
-define( 'GD_B2B_VERSION', '2.0.0' );
+define( 'GD_B2B_VERSION', '2.1.0' );
 define( 'GD_B2B_FILE', __FILE__ );
 define( 'GD_B2B_PATH', plugin_dir_path( __FILE__ ) );
 define( 'GD_B2B_URL', plugin_dir_url( __FILE__ ) );
@@ -47,6 +47,7 @@ require_once GD_B2B_PATH . 'includes/class-gd-b2b-registration.php';
 require_once GD_B2B_PATH . 'includes/class-gd-b2b-checkout-fields.php';
 require_once GD_B2B_PATH . 'includes/class-gd-b2b-account-ui.php';
 require_once GD_B2B_PATH . 'includes/class-gd-b2b-cart-blocker.php';
+require_once GD_B2B_PATH . 'includes/class-gd-b2b-pricing.php';
 require_once GD_B2B_PATH . 'includes/class-gd-b2b-plugin.php';
 require_once GD_B2B_PATH . 'includes/functions-core.php';
 

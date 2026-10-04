@@ -228,3 +228,12 @@ gd-b2b/
 - `gd_b2b_settings` — configurazione generale (ruoli approvabili + impostazioni email)
 - `gd_b2b_email_templates` — template email personalizzati (array slug → HTML)
 - `gd_b2b_audit_log` — log attività
+
+---
+
+## Sessione — Prezzi B2B (v2.1.0)
+
+- Nuova classe `includes/class-gd-b2b-pricing.php`: pubblico per variante (`_gd_b2b_audience` = retail|b2b|both, fallback sul vecchio `_gd_b2b_only`), visibilità/acquistabilità, intervallo prezzi, dropdown, confezione predefinita, sconto extra per ruolo (opzione `gd_b2b_pricing`).
+- Nuova pagina admin "GD B2B > Prezzi B2B" (`includes/admin/class-gd-b2b-admin-pricing.php`).
+- Ruoli commerciali: vedono solo varianti `b2b`/`both`; clienti non B2B solo `retail`/`both`; admin e shop manager tutte.
+- Sostituisce il mu-plugin `gd-variazioni-b2b.php` (rimosso).

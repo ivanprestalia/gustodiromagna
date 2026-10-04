@@ -39,6 +39,9 @@ class GD_B2B_Plugin {
 	/** @var GD_B2B_Cart_Blocker */
 	public GD_B2B_Cart_Blocker $cart_blocker;
 
+	/** @var GD_B2B_Pricing */
+	public GD_B2B_Pricing $pricing;
+
 	/** @var GD_B2B_Admin|null */
 	public ?GD_B2B_Admin $admin = null;
 
@@ -66,6 +69,7 @@ class GD_B2B_Plugin {
 		$this->checkout_fields = new GD_B2B_Checkout_Fields();
 		$this->account_ui      = new GD_B2B_Account_UI();
 		$this->cart_blocker    = new GD_B2B_Cart_Blocker();
+		$this->pricing         = new GD_B2B_Pricing();
 	}
 
 	/**
@@ -77,6 +81,7 @@ class GD_B2B_Plugin {
 		$this->checkout_fields->init();
 		$this->account_ui->init();
 		$this->cart_blocker->init();
+		$this->pricing->init();
 
 		if ( is_admin() ) {
 			if ( ! class_exists( 'WP_List_Table', false ) ) {
@@ -86,6 +91,7 @@ class GD_B2B_Plugin {
 			require_once GD_B2B_PATH . 'includes/admin/class-gd-b2b-admin-ajax.php';
 			require_once GD_B2B_PATH . 'includes/admin/class-gd-b2b-admin-settings.php';
 			require_once GD_B2B_PATH . 'includes/admin/class-gd-b2b-admin-email-templates.php';
+			require_once GD_B2B_PATH . 'includes/admin/class-gd-b2b-admin-pricing.php';
 			require_once GD_B2B_PATH . 'includes/admin/class-gd-b2b-clients-list-table.php';
 
 			$this->admin = new GD_B2B_Admin();

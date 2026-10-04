@@ -4,7 +4,7 @@ Tags: woocommerce, b2b, wholesale, registrazione aziende, fatturazione elettroni
 Requires at least: 6.0
 Tested up to: 6.8
 Requires PHP: 7.4
-Stable tag: 2.0.0
+Stable tag: 2.1.0
 License: GPLv2 or later
 Text Domain: gd-b2b
 
@@ -105,6 +105,9 @@ I template HTML si trovano in `templates/emails/`. Puoi sovrascriverli nel tema 
 4. Email HTML di attivazione profilo B2B.
 
 == Changelog ==
+
+= 2.1.0 =
+* Nuova sezione "Prezzi B2B": pubblico per variante (privati / aziende / tutti), prezzi di listino e sconto extra per livello (premium, gold...). Sostituisce il mu-plugin gd-variazioni-b2b.
 
 = 2.0.0 =
 * Refactoring OOP completo dell'architettura plugin.
